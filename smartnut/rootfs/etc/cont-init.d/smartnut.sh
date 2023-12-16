@@ -3,6 +3,8 @@
 # Home Assistant Community Add-on: SmartNUT - Network UPS Tools
 # Configures SmartNUT - Network UPS Tools
 # ==============================================================================
+set -x
+
 readonly UPS_CONF=/etc/nut/ups.conf
 
 # FIXME: check if root is really needed? simple 'nut' should do
@@ -13,10 +15,11 @@ chown -R root:root /etc/nut
 find /etc/nut -not -perm 0660 -type f -exec chmod 0660 {} \;
 find /etc/nut -not -perm 0660 -type d -exec chmod 0660 {} \;
 
+# Clear configuration
 echo "" > "${UPS_CONF}"
-nut-scanner -A
 
 # NUT discovery through Avahi
+nut-scanner -A
 
 # Check for USB devices first
 if bashio::config.true 'autoconf_usb_devices' ;then
