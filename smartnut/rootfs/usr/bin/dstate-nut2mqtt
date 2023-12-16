@@ -1,0 +1,176 @@
+#!/bin/bash
+#
+# File: dstate-nut2mqtt
+# Version: 0.4
+# Description
+#       Script that queries and parses data from NUT drivers Unix sockets (using netcat)
+#       then transform these into MQTT payload to publish (using mosquitto_pub)
+#       This technic:
+#       * just requires standard public NUT versions (source or binary packages)
+#       * should work with any NUT version from the past decade
+#       * allows to eliminate upsd and client layers, and their configuration complexity
+#       * publishes to MQTT, but can easily be adapted to any other broker/bus/method
+#       * support the following types of devices:
+#         * USB: plug and play for (decent) USB device, including multiple
+#         * SNMP, NetXML and NUT client (for remote NUT upsd server, like Synology NAS):
+#           with manual edits, but could be eased by nut-scanner too, as for USB
+#
+# References:
+# * https://networkupstools.org/docs/developer-guide.chunked/sock-protocol.html
+# * https://www.home-assistant.io/integrations/mqtt
+#
+# Copyright: Arnaud Quette <arnaud.quette@free.fr>
+# Version: 0.4
+# License: GPL-2+
+#
+# TODO:
+# * args 
+# * debug levels according to NUT /HA (loglevel)
+# * MQTT (auto)conf
+# * setup working context mkdir /var/run/ => NEEDED?
+# * trap sig, error handling, hardening, polishing...
+# * CPU consumption! (seems high for that little things!)
+
+debug()
+{
+    #echo -e "$1"
+    echo "" > /dev/null
+}
+
+ping_device()
+{
+    debug "* ping $1\n"
+    answer="`echo "PING" | netcat -W1 -U /var/run/nut/$1`"
+    [ "$answer" = "PONG" ] && return 0
+    # FIXME: debug PONG
+}
+
+dump_device()
+{
+    #debug "* dump $1\n"
+    echo "DUMPALL" | netcat -w1 -U /var/run/nut/$1 > $device.newdump
+    # FIXME: until = DUMPDONE
+    #echo "-----------------------"
+    #cat $device.newdump
+    #echo "-----------------------"
+}
+
+nut2mqtt_getconfig()
+{
+    debug "* Get MQTT config $1\n"
+
+    if [ -f "/etc/nut/libnutdrv_mqtt.conf" ];
+    then
+        debug "OK: /etc/nut/libnutdrv_mqtt.conf"
+        source /etc/nut/libnutdrv_mqtt.conf
+    else
+        debug "NO /etc/nut/libnutdrv_mqtt.conf"
+        #FIXME: fatal!
+    fi
+    # FIXME: sanity checks -n MQTT_HOST MQTT_USER MQTT_PASSWORD
+}
+nut2mqtt_pub()
+{
+    device=$1
+    variable=$2
+    value="$3"
+    # FIXME: sanity checks -n MQTT_HOST MQTT_USER MQTT_PASSWORD
+    mosquitto_pub -h $MQTT_HOST -u $MQTT_USER -P $MQTT_PASSWORD -t "homeassistant/nut/$device/$variable" -m "$value"
+    echo -e "Published => t: homeassistant/nut/$device/$variable, m: $value"
+}
+
+# Process 1 line from the dump
+# Format: FIXME
+process_line()
+{
+    device=$1
+    line="$2"
+    debug "** process line: $line"
+    case $line in
+        SETINFO*)
+            # format: "variable value"
+            case $line in
+                # Filter out some variables (driver.* but driver.name)
+                # FIXME: complete filter!! outlet?
+                *device.*|*battery.*|input.*|*ups.*|output.*|*driver.name)
+                    variable="`echo $line | cut -d' ' -f2`"
+                    value="`echo $line | cut -d' ' -f3-`"
+                    debug "Parsed => $variable: $value"
+                    # FIXME: translate ups.status? and more value lookup?
+
+                    # Publish to MQTT broker 
+                    nut2mqtt_pub $device $variable "$value"
+                    ;;
+                *)
+                    ;;
+            esac
+            ;;
+        SETAUX*|SETFLAGS*|ADDCMD*)
+            # FIXME: discarded for now, to be processed
+            ;;
+        DATAOK*)
+            # FIXME
+            ;;
+        DUMPDONE*)
+            # FIXME: check if we got one, else EAGAIN
+            ;;
+    esac
+}
+
+# Process the result of a dump and diff it with the
+# previous one, to just process and publish updates
+process_dump()
+{
+    device=$1
+    debug "* process $device\n"
+
+    # Create a base to compare, if none yet
+    [ -f "$device.lastdump" ] || touch $device.lastdump
+
+    # Filter for updates
+    diff "$device.lastdump" "$device.newdump" | sed -n 's/^> //p' > $device.updates
+
+    if [ -s $device.updates ]; then
+        echo "got updates..."
+    else
+        echo "no update..."
+    fi
+
+    while IFS= read -r line;
+    do
+        process_line $device "$line"
+    done < $device.updates
+    # FIXME: propagate EAGAIN
+
+    # Rotate dumps and cleanup
+    rm -f $device.updates $device.lastdump
+    cp $device.newdump $device.lastdump
+}
+
+# Main
+echo "Starting `basename $0`"
+echo "------------------------"
+echo "CWD: `pwd`"
+
+# Setup context
+# Cleanup
+rm -f *.lastdump *.newdump *.updates
+# FIXME: mktemp?
+
+# Setup MQTT connection
+nut2mqtt_getconfig
+
+while true
+do
+    # iterate over available devices
+    for device in $(ls /var/run/nut | grep -v ".pid")
+    do
+        echo -n "Processing device: $device: "
+        # FIXME: skip if failed to ping 
+        ping_device $device
+        dump_device $device
+        process_dump $device
+    done
+    # FIXME: make a param
+    sleep 10
+done
