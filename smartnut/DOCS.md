@@ -79,7 +79,7 @@ FIXME
 The add-on can be used with the basic configuration, with other options for more
 advanced users.
 
-<!-->
+<!--
 **Note**: _Remember to restart the add-on when the configuration is changed._
 
 SmartNUT add-on configuration:
