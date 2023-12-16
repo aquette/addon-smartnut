@@ -3,7 +3,6 @@
 # Home Assistant Community Add-on: SmartNUT - Network UPS Tools
 # Configures SmartNUT - Network UPS Tools
 # ==============================================================================
-set -x
 
 readonly UPS_CONF=/etc/nut/ups.conf
 
