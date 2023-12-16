@@ -33,8 +33,8 @@ many [individuals and companies][nut-acknowledgements].
 
 ## Installation
 
-| :exclamation:  This is an early development version! You need to enable Advanced mode + HACS... at your own risk ;) |
-|---------------------------------------------------------------------------------------------------------------------|
+| WARNING: This is an early development version! You need to enable Advanced mode + HACS... at your own risk :wink: |
+|-------------------------------------------------------------------------------------------------------------------|
 
 The installation of this add-on is pretty straightforward and not different in
 comparison to installing any other Home Assistant add-on.
@@ -63,8 +63,6 @@ comparison to installing any other Home Assistant add-on.
 7. Check the *How to use* below for integrating into Home Assistant MQTT.
 
 ## How to use
-
-FIXME
 
 For now:
 * just launch (for USB) and/or enable enable_simulated_device,

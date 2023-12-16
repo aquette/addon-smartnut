@@ -4,11 +4,6 @@
 # Configures SmartNUT - Network UPS Tools
 # ==============================================================================
 readonly UPS_CONF=/etc/nut/ups.conf
-declare nutmode
-declare password
-declare shutdowncmd
-declare upsmonpwd
-declare username
 
 # FIXME: check if root is really needed? simple 'nut' should do
 chown root:root /var/run/nut
@@ -18,7 +13,7 @@ chown -R root:root /etc/nut
 find /etc/nut -not -perm 0660 -type f -exec chmod 0660 {} \;
 find /etc/nut -not -perm 0660 -type d -exec chmod 0660 {} \;
 
-echo "" > /etc/nut/ups.conf
+echo "" > "${UPS_CONF}"
 nut-scanner -A
 
 # NUT discovery through Avahi
@@ -27,7 +22,7 @@ nut-scanner -A
 if bashio::config.true 'autoconf_usb_devices' ;then
 
     bashio::log.info "Autodetecting and configuring USB devices"
-    nut-scanner -U > /etc/nut/ups.conf
+    nut-scanner -U >  "${UPS_CONF}"
 fi
 
 if bashio::config.true 'manual_edit_devices' ;then
@@ -46,7 +41,7 @@ if bashio::config.true 'enable_simulated_device' ;then
         echo "[smartnut-dummy]"
         echo -e "\tdriver = dummy-ups"
         echo -e "\tport = smartnut-dummy.seq"
-    } >> /etc/nut/ups.conf
+    } >>  "${UPS_CONF}"
 
 fi
 
@@ -91,8 +86,8 @@ fi
 
 bashio::log.info "---------------------"
 bashio::log.info "Checking configuration:"
-bashio::log.info "/etc/nut/ups.conf"
-cat /etc/nut/ups.conf
+bashio::log.info  "${UPS_CONF}"
+cat "${UPS_CONF}"
 bashio::log.info "/etc/nut/libnutdrv_mqtt.conf"
 cat /etc/nut/libnutdrv_mqtt.conf
 
