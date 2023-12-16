@@ -79,6 +79,11 @@ FIXME
 The add-on can be used with the basic configuration, with other options for more
 advanced users.
 
+Note that the following are currently not implemented:
+
+* manually_edit_devices
+* autoconf_remote_nut_devices
+
 <!--
 **Note**: _Remember to restart the add-on when the configuration is changed._
 
