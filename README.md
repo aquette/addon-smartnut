@@ -1,4 +1,10 @@
-# Home Assistant Community Add-on: SmartNUT - Network UPS Tools
+<div align="center">
+    <a href="https://github.com/aquette/smartnut">
+        <img width="150" height="150" src="smartnut/logo.png">
+    </a>
+    <br>
+    <h1>Home Assistant Community Add-on: SmartNUT - Network UPS Tools</h1>
+</div>
 
 [![GitHub Release][releases-shield]][releases]
 ![Project Stage][project-stage-shield]
