@@ -65,7 +65,7 @@ comparison to installing any other Home Assistant add-on.
 ## How to use
 
 For now:
-* just launch (for USB) and/or enable enable_simulated_device,
+* just start SmartNUT (for USB) and/or use enable enable_simulated_device,
 * check the Journal tab for the startup sequence,
 * listen on MQTT topic 'homeassistant/nut/#' using MQTT integration (FIXME),
 * and have fun :D

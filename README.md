@@ -67,12 +67,12 @@ As a result, many NUT limitations can be removed, to focus on drivers and event 
   - devices support at least identical to the official NUT Add-on
     USB (including multiple units), SNMP, NetXML-UPS. NUT remote as bonus
 - Roadmap:
-  - 0.1: 1rst functional prototype (source)
-  - 0.2:
+  - [x]  0.1: 1rst functional prototype (source)
+  - [ ] 0.2:
     - add support for manually_edit_devices
     - complete documentation, translations and CICD builds
     - Also work on MQTT UPS integration in https://www.home-assistant.io/integrations/mqtt 
-  - 0.3 - 0.5:
+  - [ ]  0.3 - 0.5:
     - add support for autoconf_remote_nut_devices
     - Full integration with HA MQTT UPS
     - dev & users feedback integration, issues fix and polishing
@@ -84,14 +84,14 @@ As a result, many NUT limitations can be removed, to focus on drivers and event 
   - develop upstream SmartNUT: https://github.com/networkupstools/nut/projects/3
   - move to upstream SmartNUT
 - Roadmap:
-  - 0.6: 1rst functional prototype, using upstream SmartNUT, with Debian packages
-  - 0.7 - 0.9: users feedback integration, issues fix and polishing
+  - [ ]  0.6: 1rst functional prototype, using upstream SmartNUT, with Debian packages
+  - [ ]  0.7 - 0.9: users feedback integration, issues fix and polishing
 
 ### Stable
 
 - Aim: all Home Assistant SmartNUT Add-on Users happy :heart_eyes:
 - Roadmap:
-  - 1.0 - ...: ? 
+  - [ ]  1.0 - ...: ?
 
 --------------------------
 
