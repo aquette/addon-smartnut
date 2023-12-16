@@ -179,7 +179,7 @@ our [GitHub Repository][repository].
 [discord-ha]: https://discord.gg/c5DvZ4e
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
-[docs]: https://github.com/aquette/addon-smartnut/blob/main/nut/DOCS.md
+[docs]: https://github.com/aquette/addon-smartnut/blob/main/smartnut/DOCS.md
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
 [forum]: https://community.home-assistant.io/t/community-hass-io-add-on-network-ups-tools/68516
 [github-actions-shield]: https://github.com/aquette/addon-smartnut/workflows/CI/badge.svg
@@ -191,7 +191,7 @@ our [GitHub Repository][repository].
 [nut-acknowledgements]: https://networkupstools.org/acknowledgements.html
 [nut-compatible]: https://networkupstools.org/stable-hcl.html
 [nut-features]: https://networkupstools.org/features.html
-[nut-ha-docs]: https://www.home-assistant.io/integrations/nut/
+[nut-ha-docs]: https://www.home-assistant.io/integrations/smartnut/
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
 [reddit]: https://reddit.com/r/homeassistant
 [releases-shield]: https://img.shields.io/github/release/aquette/addon-smartnut.svg
