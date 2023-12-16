@@ -27,12 +27,29 @@
 
 SmartNUT is a refreshed form-factor of NUT - Network UPS Tools - suited to modern integrations and smart systems, like Home Assistant.
 
+SmartNUT allows you to monitor and manage UPS (battery backup) using a NUT server.
+It lets you view their status, receives notifications about important events, and execute commands as device actions.
+
+Conversely to previous NUT Add-on, SmartNUT:
+
+* eliminates NUT upsd and client layers, and their configuration complexity
+* does not require an additional integration: native support in HA MQTT (hem, todo)
+* publishes the data to MQTT (with HA local broker autodetected).
+But can easily be adapted to any other broker/bus/method (HomeKit, ...)
+* support the following types of devices:
+    * USB: plug and play for (decent) USB device, including multiple ones
+    * SNMP, NetXML and NUT client (for remote NUT upsd server, like Synology NAS):
+      with manual edits, but will be eased by using nut-scanner too, as for USB
+
 It uses advanced methods and tools from NUT to remove its configuration complexity.
 It also removes the need for the NUT server (upsd) and client (upsmon, HA Integration) layers, by connecting NUT drivers directly to a selectable communication bus (MQTT, HomeKit, ...). It finally limits the drivers set to USB and networked (SNMP and NetXML-UPS), which are more suited to modern setups.
 
 Nowadays, smart setups already includes the necessary communication (MQTT broker, smart protocols, ...) and protection means (through automations).
 These smart setup only consider the smarter units (USB, even cheap, and networked units like SNMP and XML-PDC).
 As a result, many NUT limitations can be removed, to focus on drivers and event based mechanism.
+
+
+[:books: Read the full add-on documentation][docs]
 
 ## Development and release plans
 
