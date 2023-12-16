@@ -3,7 +3,7 @@
         <img width="150" height="150" src="smartnut/logo.png">
     </a>
     <br>
-    <h1>Home Assistant Community Add-on: SmartNUT - Network UPS Tools</h1>
+    <h1>Home Assistant Community Add-on: SmartNUT</h1>
 </div>
 
 [![GitHub Release][releases-shield]][releases]
@@ -34,7 +34,7 @@ Conversely to previous NUT Add-on, SmartNUT:
 
 * eliminates NUT upsd and client layers, and their configuration complexity
 * does not require an additional integration: native support in HA MQTT (hem, todo)
-* publishes the data to MQTT (with HA local broker autodetected).
+* publishes the data to MQTT (HA local broker autodetected).
 But can easily be adapted to any other broker/bus/method (HomeKit, ...)
 * support the following types of devices:
     * USB: plug and play for (decent) USB device, including multiple ones
@@ -119,12 +119,6 @@ many [individuals and companies][nut-acknowledgements].
 
 Be sure to add the NUT integration after starting the add-on.
 
-**Note**: _The host `a0d7b954-nut` can be used to allow Home Assistant to
-communicate directly with the addon_
-
-For more information on how to configure the NUT integration in Home Assistant
-see the [NUT integration documentation][nut-ha-docs].
-
 [:books: Read the full add-on documentation][docs]
 
 ## Support
@@ -155,6 +149,8 @@ Thank you for being involved! :heart_eyes:
 ## Authors & contributors
 
 The original setup of this repository is by [Arnaud Quette][aquette].
+
+[Arnaud Quette][aquette] is the retired former NUT project leader, and its main developer / Debian packager / author of many drivers (usbhid-ups, snmp-ups, dummy-ups, ...) / co author of many others / author of WMNUT and lot more (...)
 
 For a full list of all authors and contributors,
 check [the contributor's page][contributors].
