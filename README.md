@@ -75,9 +75,9 @@ As a result, many NUT limitations can be removed, to focus on drivers and event 
 A Network UPS Tools daemon to allow you to easily manage battery backup (UPS)
 devices connected to your Home Assistant machine.
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+<!--
 Example doc: https://github.com/zigbee2mqtt/hassio-zigbee2mqtt
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+-->
 
 ## About
 
@@ -149,21 +149,21 @@ our [GitHub Repository][repository].
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
 [buymeacoffee-shield]: https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg
 [buymeacoffee]: https://www.buymeacoffee.com/arnaudqueto
-[commits-shield]: https://img.shields.io/github/commit-activity/y/hassio-addons/addon-nut.svg
-[commits]: https://github.com/hassio-addons/addon-nut/commits/main
-[contributors]: https://github.com/hassio-addons/addon-nut/graphs/contributors
+[commits-shield]: https://img.shields.io/github/commit-activity/y/aquette/addon-smartnut.svg
+[commits]: https://github.com/aquette/addon-smartnut/commits/main
+[contributors]: https://github.com/aquette/addon-smartnut/graphs/contributors
 [aquette]: https://github.com/aquette
 [discord-ha]: https://discord.gg/c5DvZ4e
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
-[docs]: https://github.com/hassio-addons/addon-nut/blob/main/nut/DOCS.md
+[docs]: https://github.com/aquette/addon-smartnut/blob/main/nut/DOCS.md
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
 [forum]: https://community.home-assistant.io/t/community-hass-io-add-on-network-ups-tools/68516
-[github-actions-shield]: https://github.com/hassio-addons/addon-nut/workflows/CI/badge.svg
-[github-actions]: https://github.com/hassio-addons/addon-nut/actions
+[github-actions-shield]: https://github.com/aquette/addon-smartnut/workflows/CI/badge.svg
+[github-actions]: https://github.com/aquette/addon-smartnut/actions
 [i386-shield]: https://img.shields.io/badge/i386-no-red.svg
-[issue]: https://github.com/hassio-addons/addon-nut/issues
-[license-shield]: https://img.shields.io/github/license/hassio-addons/addon-nut.svg
+[issue]: https://github.com/aquette/addon-smartnut/issues
+[license-shield]: https://img.shields.io/github/license/aquette/addon-smartnut.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2023.svg
 [nut-acknowledgements]: https://networkupstools.org/acknowledgements.html
 [nut-compatible]: https://networkupstools.org/stable-hcl.html
@@ -171,6 +171,6 @@ our [GitHub Repository][repository].
 [nut-ha-docs]: https://www.home-assistant.io/integrations/nut/
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
 [reddit]: https://reddit.com/r/homeassistant
-[releases-shield]: https://img.shields.io/github/release/hassio-addons/addon-nut.svg
-[releases]: https://github.com/hassio-addons/addon-nut/releases
+[releases-shield]: https://img.shields.io/github/release/aquette/addon-smartnut.svg
+[releases]: https://github.com/aquette/addon-smartnut/releases
 [repository]: https://github.com/hassio-addons/repository

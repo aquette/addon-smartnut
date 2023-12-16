@@ -33,8 +33,8 @@ many [individuals and companies][nut-acknowledgements].
 
 ## Installation
 
-| :exclamation:  This is an early development version! You need to enable Advanced mode + HACS |
-|----------------------------------------------------------------------------------------------|
+| :exclamation:  This is an early development version! You need to enable Advanced mode + HACS... at your own risk ;) |
+|---------------------------------------------------------------------------------------------------------------------|
 
 The installation of this add-on is pretty straightforward and not different in
 comparison to installing any other Home Assistant add-on.
@@ -79,6 +79,7 @@ FIXME
 The add-on can be used with the basic configuration, with other options for more
 advanced users.
 
+<!-->
 **Note**: _Remember to restart the add-on when the configuration is changed._
 
 SmartNUT add-on configuration:
@@ -339,6 +340,7 @@ automations:
 
 For more information, see the NUT docs [here][nut-notif-doc-1] and
 [here][nut-notif-doc-2].
+-->
 
 ## Changelog & Releases
 
@@ -372,7 +374,7 @@ You could also [open an issue here][issue] GitHub.
 
 The original setup of this repository is by [Arnaud Quette][aquette].
 
-[Arnaud Quette][aquette] is the former NUT project leader, main developer, Debian packager, author of many drivers (usbhid-ups, snmp-ups, dummy-ups, ...), WMNUT and lot more (...)
+[Arnaud Quette][aquette] is the retired former NUT project leader, and its main developer / Debian packager / author of many drivers (usbhid-ups, snmp-ups, dummy-ups, ...) / author of WMNUT and lot more (...)
 
 For a full list of all authors and contributors,
 check [the contributor's page][contributors].
