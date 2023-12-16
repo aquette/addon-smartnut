@@ -38,7 +38,7 @@ Conversely to previous NUT Add-on, SmartNUT:
 But can easily be adapted to any other broker/bus/method (HomeKit, ...)
 * support the following types of devices:
     * USB: plug and play for (decent) USB device, including multiple ones
-    * SNMP, NetXML and NUT client (for remote NUT upsd server, like Synology NAS):
+    * SNMP, NetXML-UPS and NUT client (for remote NUT upsd server, like Synology NAS):
       with manual edits, but will be eased by using nut-scanner too, as for USB
 
 It uses advanced methods and tools from NUT to remove its configuration complexity.
@@ -67,13 +67,14 @@ As a result, many NUT limitations can be removed, to focus on drivers and event 
   - devices support at least identical to the official NUT Add-on
     USB (including multiple units), SNMP, NetXML-UPS. NUT remote as bonus
 - Roadmap:
-  - [x]  0.1: 1rst functional prototype (source)
+  - [x] 0.1: 1rst functional prototype (source)
   - [ ] 0.2:
     - add support for manually_edit_devices
     - complete documentation, translations and CICD builds
-    - Also work on MQTT UPS integration in https://www.home-assistant.io/integrations/mqtt 
-  - [ ]  0.3 - 0.5:
-    - add support for autoconf_remote_nut_devices
+    - work on MQTT UPS integration in https://www.home-assistant.io/integrations/mqtt
+  - [ ] 0.3 - 0.5:
+    - add support for remote NUT server discovery and configuration (autoconf_remote_nut_devices)
+    - ease SNMP and NetXML-UPS discovery and configuration
     - Full integration with HA MQTT UPS
     - dev & users feedback integration, issues fix and polishing
  
