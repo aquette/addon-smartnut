@@ -3,7 +3,7 @@
 # File: dstate-nut2mqtt
 # Version: 0.4
 # Description
-#       Script that queries and parses data from NUT drivers Unix sockets (using netcat)
+#       Script that queries and parses data from NUT drivers Unix sockets (using netcat),
 #       then transform these into MQTT payload to publish (using mosquitto_pub)
 #       This technic:
 #       * just requires standard public NUT versions (source or binary packages)
@@ -148,9 +148,8 @@ process_dump()
 }
 
 # Main
-echo "Starting `basename $0`"
-echo "------------------------"
-echo "CWD: `pwd`"
+debug "Starting `basename $0`"
+debug "------------------------"
 
 # Setup context
 # Cleanup

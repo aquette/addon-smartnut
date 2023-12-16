@@ -25,6 +25,7 @@ if bashio::config.true 'autoconf_usb_devices' ;then
 
     bashio::log.info "Autodetecting and configuring USB devices"
     nut-scanner -U >  "${UPS_CONF}"
+    bashio::log.info "=> OK"
 fi
 
 if bashio::config.true 'manual_edit_devices' ;then
@@ -32,7 +33,6 @@ if bashio::config.true 'manual_edit_devices' ;then
     bashio::log.info "manual_edit_devices"
     # FIXME: process manual edits
 fi
-
 
 if bashio::config.true 'enable_simulated_device' ;then
     # https://networkupstools.org/docs/developer-guide.chunked/dev-tools.html
@@ -45,6 +45,7 @@ if bashio::config.true 'enable_simulated_device' ;then
         echo -e "\tport = smartnut-dummy.seq"
     } >>  "${UPS_CONF}"
 
+    bashio::log.info "=> OK"
 fi
 
 # MQTT config
@@ -73,11 +74,13 @@ if [ -z "$MQTT_HOST"]; then
         MQTT_PASSWORD=$(bashio::services mqtt "password")
 fi
 
-# FIXME: sanity check (-n MQTT_HOST MQTT_USER MQTT_PASSWORD) and error catching
 # FIXME
 #  - ca: str?
 #  - key: str?
 #  - cert: str?
+
+# FIXME: MQTT sanity check (-n MQTT_HOST MQTT_USER MQTT_PASSWORD) and error catching
+bashio::log.info "=> OK"
 
 # FIXME: get config...
 {
@@ -92,13 +95,13 @@ bashio::log.info  "${UPS_CONF}"
 cat "${UPS_CONF}"
 bashio::log.info "/etc/nut/libnutdrv_mqtt.conf"
 cat /etc/nut/libnutdrv_mqtt.conf
+# FIXME: -s sanity check
+bashio::log.info "=> OK"
 
 bashio::log.info "---------------------"
 bashio::log.info "Starting the SmartNUT Driver(s)..."
 upsdrvctl -u root start
-#/usr/lib/nut/usbhid-ups -u root -a nutdev1
-sleep 5
-bashio::log.info "Driver(s) started..."
+bashio::log.info "=> OK"
 
 bashio::log.info "---------------------"
 bashio::log.info "Starting the SmartNUT2MQTT Adapter..."
