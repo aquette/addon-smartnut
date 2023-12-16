@@ -52,6 +52,7 @@ comparison to installing any other Home Assistant add-on.
     1. Navigate in your Home Assistant frontend to **Settings** -> **Add-ons** -> **Add-on store**.
     2. Find the "Mosquitto broker" add-on and click it.
     3. Click on the "INSTALL" button, then start it.
+   [![Open Mosquitto add-on in your Home Assistant instance.][addon-badge]][addon-mosquitto]
    For more information, refer to **[Mosquitto broker](https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_mosquitto)** addon.
 2. Click the Home Assistant My button below to open the SmartNUT add-on on your Home
    Assistant instance.
@@ -388,6 +389,7 @@ FIXME
 
 [addon-badge]: https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg
 [addon]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Faquette%2Faddon-smartnut
+[addon-mosquitto]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fhome-assistant%2Faddons%2Ftree%2Fmaster%2Fmosquitto
 [contributors]: https://github.com/aquette/addon-smartnut/graphs/contributors
 [critical-notif]: https://companion.home-assistant.io/docs/notifications/critical-notifications
 [dale3h]: https://github.com/dale3h
