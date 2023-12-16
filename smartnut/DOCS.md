@@ -388,8 +388,8 @@ check [the contributor's page][contributors].
 
 FIXME
 
-[addon-badge]: https://my.home-assistant.io/badges/supervisor_addon.svg
-[addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=a0d7b954_nut&repository_url=https%3A%2F%2Fgithub.com%2Fhassio-addons%2Frepository
+[addon-badge]: https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg
+[addon]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Faquette%2Faddon-smartnut
 [contributors]: https://github.com/aquette/addon-smartnut/graphs/contributors
 [critical-notif]: https://companion.home-assistant.io/docs/notifications/critical-notifications
 [dale3h]: https://github.com/dale3h
