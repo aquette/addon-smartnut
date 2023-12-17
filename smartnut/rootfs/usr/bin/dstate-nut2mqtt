@@ -71,7 +71,9 @@ nut2mqtt_getconfig()
 }
 nut2mqtt_pub()
 {
-    device=$1
+    # Trim the driver part of the name (dummy-ups-smartnut-dummy)
+    # FIXME: complete drivers list
+    device_name="`echo $1 | sed 's/dummy-ups-//; s/usbhid-ups-//; s/nutdrv_qx-//; s/snmp-ups-//'`"
     variable=$2
     value="$3"
     # FIXME: sanity checks -n MQTT_HOST MQTT_USER MQTT_PASSWORD
