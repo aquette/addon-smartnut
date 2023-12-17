@@ -14,7 +14,8 @@ RUN \
         netcat-openbsd \
         libavahi-client3 \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && cd /lib/nut && ln -s dummy-ups nutclient
 
 # Copy root filesystem
 COPY rootfs /
