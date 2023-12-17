@@ -1,7 +1,7 @@
 configuration:
   log_level:
     name: Niveau de journalisation
-    description: Contrôle le niveau de détails du journal fourni par le module complémentaire
+    description: Contrôle le niveau de détails du journal fourni par le module complémentaire.
   autoconf_usb_devices:
     name: Détecter et configurer automatiquement les appareils USB
     description: Activer la découverte et la configuration automatiques des appareils USB.

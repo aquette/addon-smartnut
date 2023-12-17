@@ -37,8 +37,11 @@ many [individuals and companies][nut-acknowledgements].
 |-------------------------------------------------------------------------------------------------------------------|
 
 The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Home Assistant add-on.
+comparison to installing any other Home Assistant Community add-on.
 
+<!--
+https://www.home-assistant.io/common-tasks/os#installing-third-party-add-ons
+-->
 
 <!---
 1. If you don't have an MQTT broker yet; in Home Assistant go to **[Settings → Add-ons → Add-on store](https://my.home-assistant.io/redirect/supervisor_store/)** and install the **[Mosquitto broker](https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_mosquitto)** addon, then start it.
