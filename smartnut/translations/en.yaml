@@ -8,12 +8,15 @@ configuration:
   manually_edit_devices:
     name: Manual edition of devices configuration
     description: Allow the manual edition of devices configuration, to override USB parameters, or configure remote UPS (SNMP, NetXML or NUT client)
+  devices:
+    name: Devices
+    description: Devices configuration
   mqtt:
     name: MQTT
     description: MQTT configuration
   enable_simulated_device:
     name: Create a simulated device
-    description: Create a simulated device 'smartnut-dummy' (for development and test purposes)
+    description: Create a simulated device 'smartnut-dummy', with automatic status changes (for development and test purposes)
   autoconf_remote_nut_devices:
     name: Automatically detect and configure remote NUT devices
     description: Enable automatic discovery and configuration of remote NUT devices (NOT IMPLEMENTED YET)
