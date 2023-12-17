@@ -181,7 +181,7 @@ do
             *)
                 # Trim the driver part of the name (dummy-ups-smartnut-dummy)
                 # FIXME: complete drivers list
-                device_name=$(echo "$device" | sed 's/dummy-ups-//; s/usbhid-ups-//; s/nutdrv_qx-//; s/snmp-ups-//')
+                device_name=$(basename "$device" | sed 's/dummy-ups-//; s/usbhid-ups-//; s/nutdrv_qx-//; s/snmp-ups-//')
 
                 echo -n "Processing device: $device_name: "
                 # FIXME: skip if failed to ping
