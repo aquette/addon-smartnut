@@ -40,8 +40,13 @@ debug()
 ping_device()
 {
     debug "* ping $1\n"
-    answer="`echo "PING" | netcat -W1 -U /var/run/nut/$1`"
-    [ "$answer" = "PONG" ] && return 0
+    answer="$(echo "PING" | netcat -W1 -U /var/run/nut/$1)"
+    if [ "$answer" = "PONG" ];
+    then
+        return 0
+    else
+        return 1
+    fi
     # FIXME: debug PONG
 }
 
@@ -73,7 +78,7 @@ nut2mqtt_pub()
 {
     # Trim the driver part of the name (dummy-ups-smartnut-dummy)
     # FIXME: complete drivers list
-    device_name="`echo $1 | sed 's/dummy-ups-//; s/usbhid-ups-//; s/nutdrv_qx-//; s/snmp-ups-//'`"
+    device_name="$(echo $1 | sed 's/dummy-ups-//; s/usbhid-ups-//; s/nutdrv_qx-//; s/snmp-ups-//')"
     variable=$2
     value="$3"
     # FIXME: sanity checks -n MQTT_HOST MQTT_USER MQTT_PASSWORD
@@ -95,8 +100,8 @@ process_line()
                 # Filter out some variables (driver.* but driver.name)
                 # FIXME: complete filter!! outlet?
                 *device.*|*battery.*|input.*|*ups.*|output.*|*driver.name)
-                    variable="`echo $line | cut -d' ' -f2`"
-                    value="`echo $line | cut -d' ' -f3-`"
+                    variable="$(echo $line | cut -d' ' -f2)"
+                    value="$(echo $line | cut -d' ' -f3-)"
                     debug "Parsed => $variable: $value"
                     # FIXME: translate ups.status? and more value lookup?
 
@@ -150,7 +155,7 @@ process_dump()
 }
 
 # Main
-debug "Starting `basename $0`"
+debug "Starting $(basename $0)"
 debug "------------------------"
 
 # Setup context
@@ -168,11 +173,15 @@ do
     do
         # Trim the driver part of the name (dummy-ups-smartnut-dummy)
         # FIXME: complete drivers list
-        device_name="`echo $device | sed 's/dummy-ups-//; s/usbhid-ups-//; s/nutdrv_qx-//; s/snmp-ups-//'`"
+        device_name="$(echo $device | sed 's/dummy-ups-//; s/usbhid-ups-//; s/nutdrv_qx-//; s/snmp-ups-//')"
 
         echo -n "Processing device: $device_name: "
         # FIXME: skip if failed to ping 
         ping_device $device
+        if [ $? -eq 1 ];
+        then
+            echo "no communication..."
+        fi
         dump_device $device
         process_dump $device
     done
