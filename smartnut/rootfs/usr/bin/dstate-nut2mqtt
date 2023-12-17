@@ -33,6 +33,7 @@
 
 debug()
 {
+    # FIXME: inherit from system, like HA
     #echo -e "$1"
     echo "" > /dev/null
 }
@@ -62,11 +63,12 @@ dump_device()
 
 nut2mqtt_getconfig()
 {
-    debug "* Get MQTT config $1\n"
+    debug "* Get MQTT config:\n"
 
     if [ -f "/etc/nut/libnutdrv_mqtt.conf" ];
     then
         debug "OK: /etc/nut/libnutdrv_mqtt.conf"
+        # shellcheck source=/etc/nut/libnutdrv_mqtt.conf
         source /etc/nut/libnutdrv_mqtt.conf
     else
         debug "NO /etc/nut/libnutdrv_mqtt.conf"
