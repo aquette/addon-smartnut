@@ -14,7 +14,8 @@ chown -R root:root /etc/nut
 find /etc/nut -not -perm 0660 -type f -exec chmod 0660 {} \;
 find /etc/nut -not -perm 0660 -type d -exec chmod 0660 {} \;
 
-# Init configuration, to be able to append
+# Init empty configuration, to be able to append
+rm -f "${UPS_CONF}"
 touch "${UPS_CONF}"
 
 # Check for USB devices first

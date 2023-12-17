@@ -74,7 +74,7 @@ As a result, many NUT limitations can be removed, to focus on drivers and event 
     - [ ] Fix user's MQTT configuration retrieval
     - [ ] Complete documentation
     - [x] Complete base translations (en, fr)
-    - [ ] Add support for remote NUT server discovery and configuration (autoconf_remote_nut_devices)
+    - [x] Add support for remote NUT server discovery and configuration (autoconf_remote_nut_devices)
   - [ ] 0.3 - 0.5:
     - [ ] Work on MQTT full UPS integration in https://www.home-assistant.io/integrations/mqtt
     - [ ] Consider other publication methods, more direct with HA
