@@ -77,8 +77,8 @@ nut2mqtt_pub()
     variable=$2
     value="$3"
     # FIXME: sanity checks -n MQTT_HOST MQTT_USER MQTT_PASSWORD
-    mosquitto_pub -h $MQTT_HOST -u $MQTT_USER -P $MQTT_PASSWORD -t "homeassistant/nut/$device/$variable" -m "$value"
-    echo -e "Published => t: homeassistant/nut/$device/$variable, m: $value"
+    mosquitto_pub -h $MQTT_HOST -u $MQTT_USER -P $MQTT_PASSWORD -t "homeassistant/nut/$device_name/$variable" -m "$value"
+    echo -e "Published => t: homeassistant/nut/$device_name/$variable, m: $value"
 }
 
 # Process 1 line from the dump
