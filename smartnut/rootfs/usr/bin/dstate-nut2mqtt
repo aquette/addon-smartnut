@@ -41,7 +41,7 @@ debug()
 ping_device()
 {
     debug "* ping $1\n"
-    answer="$(echo "PING" | netcat -W1 -U /var/run/nut/$1)"
+    answer=$(echo "PING" | netcat -W1 -U "/var/run/nut/$1")
     if [ "$answer" = "PONG" ];
     then
         return 0
@@ -54,7 +54,7 @@ ping_device()
 dump_device()
 {
     #debug "* dump $1\n"
-    echo "DUMPALL" | netcat -w1 -U /var/run/nut/$1 > $device.newdump
+    echo "DUMPALL" | netcat -w1 -U "/var/run/nut/$1" > $device.newdump
     # FIXME: until = DUMPDONE
     #echo "-----------------------"
     #cat $device.newdump
@@ -80,11 +80,11 @@ nut2mqtt_pub()
 {
     # Trim the driver part of the name (dummy-ups-smartnut-dummy)
     # FIXME: complete drivers list
-    device_name="$(echo $1 | sed 's/dummy-ups-//; s/usbhid-ups-//; s/nutdrv_qx-//; s/snmp-ups-//')"
+    device_name=$(echo "$1" | sed 's/dummy-ups-//; s/usbhid-ups-//; s/nutdrv_qx-//; s/snmp-ups-//')
     variable=$2
     value="$3"
     # FIXME: sanity checks -n MQTT_HOST MQTT_USER MQTT_PASSWORD
-    mosquitto_pub -h $MQTT_HOST -u $MQTT_USER -P $MQTT_PASSWORD -t "homeassistant/nut/$device_name/$variable" -m "$value"
+    mosquitto_pub -h "$MQTT_HOST" -u "$MQTT_USER" -P "$MQTT_PASSWORD" -t "homeassistant/nut/$device_name/$variable" -m "$value"
     echo -e "Published => t: homeassistant/nut/$device_name/$variable, m: $value"
 }
 
@@ -102,13 +102,13 @@ process_line()
                 # Filter out some variables (driver.* but driver.name)
                 # FIXME: complete filter!! outlet?
                 *device.*|*battery.*|input.*|*ups.*|output.*|*driver.name)
-                    variable="$(echo $line | cut -d' ' -f2)"
-                    value="$(echo $line | cut -d' ' -f3-)"
+                    variable=$(echo "$line" | cut -d' ' -f2)
+                    value=$(echo "$line" | cut -d' ' -f3-)
                     debug "Parsed => $variable: $value"
                     # FIXME: translate ups.status? and more value lookup?
 
                     # Publish to MQTT broker 
-                    nut2mqtt_pub $device $variable "$value"
+                    nut2mqtt_pub "$device" "$variable" "$value"
                     ;;
                 *)
                     ;;
@@ -134,12 +134,12 @@ process_dump()
     debug "* process $device\n"
 
     # Create a base to compare, if none yet
-    [ -f "$device.lastdump" ] || touch $device.lastdump
+    [ -f "$device.lastdump" ] || touch "$device.lastdump"
 
     # Filter for updates
-    diff "$device.lastdump" "$device.newdump" | sed -n 's/^> //p' > $device.updates
+    diff "$device.lastdump" "$device.newdump" | sed -n 's/^> //p' > "$device.updates"
 
-    if [ -s $device.updates ]; then
+    if [ -s "$device.updates" ]; then
         echo "got updates..."
     else
         echo "no update..."
@@ -147,13 +147,13 @@ process_dump()
 
     while IFS= read -r line;
     do
-        process_line $device "$line"
-    done < $device.updates
+        process_line "$device" "$line"
+    done < "$device.updates"
     # FIXME: propagate EAGAIN
 
     # Rotate dumps and cleanup
-    rm -f $device.updates $device.lastdump
-    cp $device.newdump $device.lastdump
+    rm -f "./$device.updates" "./$device.lastdump"
+    cp "./$device.newdump" "./$device.lastdump"
 }
 
 # Main
@@ -179,17 +179,17 @@ do
             *)
                 # Trim the driver part of the name (dummy-ups-smartnut-dummy)
                 # FIXME: complete drivers list
-                device_name="$(echo $device | sed 's/dummy-ups-//; s/usbhid-ups-//; s/nutdrv_qx-//; s/snmp-ups-//')"
+                device_name=$(echo "$device" | sed 's/dummy-ups-//; s/usbhid-ups-//; s/nutdrv_qx-//; s/snmp-ups-//')
 
                 echo -n "Processing device: $device_name: "
                 # FIXME: skip if failed to ping
-                ping_device $device
+                ping_device "$device"
                 if [ $? -eq 1 ];
                 then
                     echo "no communication..."
                 fi
-                dump_device $device
-                process_dump $device
+                dump_device "$device"
+                process_dump "$device"
                 ;;
         esac
     done
