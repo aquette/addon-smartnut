@@ -14,14 +14,14 @@ chown -R root:root /etc/nut
 find /etc/nut -not -perm 0660 -type f -exec chmod 0660 {} \;
 find /etc/nut -not -perm 0660 -type d -exec chmod 0660 {} \;
 
-# Clear configuration
-echo "" > "${UPS_CONF}"
+# Init configuration, to be able to append
+touch "${UPS_CONF}"
 
 # Check for USB devices first
 if bashio::config.true 'autoconf_usb_devices' ;then
 
     bashio::log.info "Autodetecting and configuring USB devices"
-    nut-scanner -U >  "${UPS_CONF}"
+    nut-scanner -U >>  "${UPS_CONF}"
     bashio::log.info "=> OK"
 fi
 
@@ -43,7 +43,6 @@ if bashio::config.true 'manually_edit_devices' ;then
 
         bashio::log.info "Configuring Device named ${upsname}..."
         {
-            echo
             echo "[${upsname}]"
             echo -e "\tdriver = ${upsdriver}"
             echo -e "\tport = ${upsport}"
@@ -64,7 +63,6 @@ if bashio::config.true 'enable_simulated_device' ;then
 
     bashio::log.info "Configuring Simulation Device 'smartnut-dummy'..."
     {
-        echo
         echo "[smartnut-dummy]"
         echo -e "\tdriver = dummy-ups"
         echo -e "\tport = smartnut-dummy.seq"
@@ -79,12 +77,19 @@ if bashio::config.true 'autoconf_remote_nut_devices' ;then
     bashio::log.info "Autodetecting and configuring remote NUT devices"
 
     # NUT discovery through Avahi
-    nut-scanner -A
+    #nut-scanner -A
 
     # Or using classic method...
     # FIXME: requires network params
-    #nut-scanner -O ...
+    nut-scanner -O -m 192.168.1.1/24
 fi
+
+# FIXME:
+# autoconf_snmp_devices
+# nut-scanner -S -m 192.168.1.1/24
+#
+# autoconf_netxml_devices
+# nut-scanner -M -m 192.168.1.1/24
 
 # MQTT config
 bashio::log.info "Configuring MQTT..."
