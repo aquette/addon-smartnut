@@ -36,12 +36,6 @@ if bashio::config.true 'manually_edit_devices' ;then
         upsname=$(bashio::config "devices[${device}].name")
         upsdriver=$(bashio::config "devices[${device}].driver")
         upsport=$(bashio::config "devices[${device}].port")
-        if bashio::config.has_value "devices[${device}].powervalue"; then
-            upspowervalue=$(bashio::config "devices[${device}].powervalue")
-        else
-            upspowervalue="1"
-        fi
-        # FIXME: not useful anymore (?)
 
         bashio::log.info "Configuring Device named ${upsname}..."
         {
