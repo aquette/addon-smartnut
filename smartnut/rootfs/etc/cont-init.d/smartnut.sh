@@ -17,9 +17,6 @@ find /etc/nut -not -perm 0660 -type d -exec chmod 0660 {} \;
 # Clear configuration
 echo "" > "${UPS_CONF}"
 
-# NUT discovery through Avahi
-nut-scanner -A
-
 # Check for USB devices first
 if bashio::config.true 'autoconf_usb_devices' ;then
 
@@ -74,6 +71,19 @@ if bashio::config.true 'enable_simulated_device' ;then
     } >>  "${UPS_CONF}"
 
     bashio::log.info "=> OK"
+fi
+
+
+if bashio::config.true 'autoconf_remote_nut_devices' ;then
+
+    bashio::log.info "Autodetecting and configuring remote NUT devices"
+
+    # NUT discovery through Avahi
+    nut-scanner -A
+
+    # Or using classic method...
+    # FIXME: requires network params
+    #nut-scanner -O ...
 fi
 
 # MQTT config
