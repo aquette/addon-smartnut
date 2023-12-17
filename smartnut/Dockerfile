@@ -1,4 +1,5 @@
 ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:7.2.0
+# hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
 # Setup base
@@ -10,9 +11,9 @@ RUN \
         nut-snmp=2.8.0-7 \
         nut-xml=2.8.0-7 \
         usbutils=1:014-1 \
-        mosquitto-clients \
-        netcat-openbsd \
-        libavahi-client3 \
+        mosquitto-clients=2.0.11-1.2+deb12u1 \
+        netcat-openbsd=1.219-1 \
+        libavahi-client3=0.8-10 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && cd /lib/nut && ln -s dummy-ups nutclient
