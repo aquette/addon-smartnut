@@ -26,7 +26,7 @@ if bashio::config.true 'autoconf_usb_devices' ;then
 fi
 
 # Process manual edits
-if bashio::config.true 'manual_edit_devices' ;then
+if bashio::config.true 'manually_edit_devices' ;then
 
     bashio::log.info "Applying manual devices configuration"
 
