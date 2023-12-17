@@ -32,7 +32,7 @@ It lets you view their status, receives notifications about important events, an
 
 Conversely to previous NUT Add-on, SmartNUT:
 
-* eliminates NUT upsd and client layers, and their configuration complexity
+* just uses NUT drivers, and eliminates NUT upsd and client layers, and their configuration complexity
 * does not require an additional integration: native support in HA MQTT (hem, todo)
 * publishes the data to MQTT (HA local broker autodetected).
 But can easily be adapted to any other broker/bus/method (HomeKit, ...)
@@ -81,6 +81,7 @@ As a result, many NUT limitations can be removed, to focus on drivers and event 
     - Add support for remote NUT server discovery and configuration (autoconf_remote_nut_devices)
     - Ease SNMP and NetXML-UPS discovery and configuration
     - Full integration with HA MQTT UPS
+    - Apparmor & security
     - Dev & users feedback integration, issues fix and polishing
  
 ### Beta:
