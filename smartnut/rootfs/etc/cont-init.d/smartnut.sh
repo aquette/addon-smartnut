@@ -35,7 +35,7 @@ if bashio::config.true 'manually_edit_devices' ;then
     for device in $(bashio::config "devices|keys"); do
         upsname=$(bashio::config "devices[${device}].name")
         upsdriver=$(bashio::config "devices[${device}].driver")
-        upsport=$(bashio::config "devices[${device}].port")
+        upsport=$(bashio::config "devices[${device}].port") 
 
         bashio::log.info "Configuring Device named ${upsname}..."
         {
@@ -105,14 +105,14 @@ MQTT_USER=""
 MQTT_PASSWORD=""
 
 for mqtt_key in $(bashio::config "mqtt|keys"); do
-    if bashio::config.has_value "mqtt[${mqtt_key}].server"; then
+    if bashio::config.has_value "mqtt.server"; then
         bashio::log.info "From user configuration"
         MQTT_HOST=$(bashio::config "mqtt.server")
     fi
-    if bashio::config.has_value "mqtt[${mqtt_key}].user"; then
+    if bashio::config.has_value "mqtt.user"; then
         MQTT_USER=$(bashio::config "mqtt.user")
     fi
-    if bashio::config.has_value "mqtt[${mqtt_key}].password"; then
+    if bashio::config.has_value "mqtt.password"; then
         MQTT_PASSWORD=$(bashio::config "mqtt.password")
     fi
 done
