@@ -74,19 +74,20 @@ As a result, many NUT limitations can be removed, to focus on drivers and event 
     - [ ] Fix user's MQTT configuration retrieval
     - [ ] Complete documentation
     - [x] Complete base translations (en, fr)
+    - [ ] Add support for remote NUT server discovery and configuration (autoconf_remote_nut_devices)
   - [ ] 0.3 - 0.5:
-    - [ ] Work on MQTT UPS integration in https://www.home-assistant.io/integrations/mqtt
+    - [ ] Work on MQTT full UPS integration in https://www.home-assistant.io/integrations/mqtt
     - [ ] Consider other publication methods, more direct with HA
     - [ ] Complete CICD builds
-    - [ ] Add support for remote NUT server discovery and configuration (autoconf_remote_nut_devices)
     - [ ] Ease SNMP and NetXML-UPS discovery and configuration
-    - [ ] Full integration with HA MQTT UPS
+    - [ ] Add options for autoconf_snmp_devices & autoconf_netxml_devices (?)
     - [ ] Apparmor & security
+    - [ ] Add more translations (make a doc section!)
     - [ ] Dev & users feedback integration, issues fix and polishing
  
 ### Beta:
 - Aim:
-  - Improved reactivity (no more dual loop), lower footprint (CPU & RAM) and clean code
+  - Improved reactivity (no more dual loop), lower footprint (CPU & RAM) and clean code (no more shell hack)
 - Requirements/solutions:
   - Finalize upstream SmartNUT: https://github.com/networkupstools/nut/projects/3
   - Switch SmartNUT Add-on to upstream SmartNUT

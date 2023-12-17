@@ -23,6 +23,7 @@ if bashio::config.true 'autoconf_usb_devices' ;then
     bashio::log.info "Autodetecting and configuring USB devices"
     nut-scanner -U >>  "${UPS_CONF}"
     bashio::log.info "=> OK"
+    # FIXME: device name hack! (nutdev1 => nutdev-usb1)
 fi
 
 # Process manual edits
@@ -80,16 +81,26 @@ if bashio::config.true 'autoconf_remote_nut_devices' ;then
     #nut-scanner -A
 
     # Or using classic method...
-    # FIXME: requires network params
-    nut-scanner -O -m 192.168.1.1/24
+    # FIXME: get network params ; for now, try a sane default
+    nut-scanner -O -m 192.168.1.1/24 >>  "${UPS_CONF}"
+
+    # NUT remote support hack! need upstream fix
+    # FIXME: + >>  "${UPS_CONF}"
+    # + cd /lib/nut; ln -s dummy-ups nutclient
+    # FIXME: device name hack! (nutdev1 => nutdev-nut1)
+    bashio::log.info "=> OK"
+    # FIXME: sanity check -s
+    # test_config_file_and_print()
 fi
 
 # FIXME:
 # autoconf_snmp_devices
 # nut-scanner -S -m 192.168.1.1/24
+# FIXME: device name hack! (nutdev1 => nutdev-snmp1)
 #
 # autoconf_netxml_devices
 # nut-scanner -M -m 192.168.1.1/24
+# FIXME: device name hack! (nutdev1 => nutdev-xml1)
 
 # MQTT config
 bashio::log.info "Configuring MQTT..."
