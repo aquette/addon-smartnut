@@ -160,7 +160,7 @@ debug "------------------------"
 
 # Setup context
 # Cleanup
-rm -f *.lastdump *.newdump *.updates
+rm -f ./*.lastdump ./*.newdump ./*.updates
 # FIXME: mktemp?
 
 # Setup MQTT connection
@@ -169,21 +169,27 @@ nut2mqtt_getconfig
 while true
 do
     # iterate over available devices
-    for device in $(ls /var/run/nut | grep -v ".pid")
+    for device in /var/run/nut/*
     do
-        # Trim the driver part of the name (dummy-ups-smartnut-dummy)
-        # FIXME: complete drivers list
-        device_name="$(echo $device | sed 's/dummy-ups-//; s/usbhid-ups-//; s/nutdrv_qx-//; s/snmp-ups-//')"
+        case $device in
+            *.pid)
+                ;;
+            *)
+                # Trim the driver part of the name (dummy-ups-smartnut-dummy)
+                # FIXME: complete drivers list
+                device_name="$(echo $device | sed 's/dummy-ups-//; s/usbhid-ups-//; s/nutdrv_qx-//; s/snmp-ups-//')"
 
-        echo -n "Processing device: $device_name: "
-        # FIXME: skip if failed to ping 
-        ping_device $device
-        if [ $? -eq 1 ];
-        then
-            echo "no communication..."
-        fi
-        dump_device $device
-        process_dump $device
+                echo -n "Processing device: $device_name: "
+                # FIXME: skip if failed to ping
+                ping_device $device
+                if [ $? -eq 1 ];
+                then
+                    echo "no communication..."
+                fi
+                dump_device $device
+                process_dump $device
+                ;;
+        esac
     done
     # FIXME: make a param
     sleep 10
