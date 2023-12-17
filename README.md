@@ -32,14 +32,14 @@ It lets you view their status, receives notifications about important events, an
 
 Conversely to previous NUT Add-on, SmartNUT:
 
-* just uses NUT drivers, and eliminates NUT upsd and client layers, and their configuration complexity
-* does not require an additional integration: native support in HA MQTT (hem, todo)
-* publishes the data to MQTT (HA local broker autodetected).
-But can easily be adapted to any other broker/bus/method (HomeKit, ...)
-* support the following types of devices:
-    * USB: plug and play for (decent) USB device, including multiple ones
-    * SNMP, NetXML-UPS and NUT client (for remote NUT upsd server, like Synology NAS):
-      with manual edits, but will be eased by using nut-scanner too, as for USB
+- just uses NUT drivers, and eliminates NUT upsd and client layers, and their configuration complexity
+- does not require an additional integration: native support in HA MQTT (hem, todo)
+- publishes the data to MQTT (HA local broker autodetected).
+  But can easily be adapted to any other broker/bus/method (HomeKit, ...)
+- support the following types of devices:
+  - USB: plug and play for (decent) USB device, including multiple ones
+  - SNMP, NetXML-UPS and NUT client (for remote NUT upsd server, like Synology NAS):
+    with manual edits, but will be eased by using nut-scanner too, as for USB
 
 It uses advanced methods and tools from NUT to remove its configuration complexity.
 It also removes the need for the NUT server (upsd) and client (upsmon, HA Integration) layers, by connecting NUT drivers directly to a selectable communication bus (MQTT, HomeKit, ...). It finally limits the drivers set to USB and networked (SNMP and NetXML-UPS), which are more suited to modern setups.
@@ -48,12 +48,12 @@ Nowadays, smart setups already includes the necessary communication (MQTT broker
 These smart setup only consider the smarter units (USB, even cheap, and networked units like SNMP and XML-PDC).
 As a result, many NUT limitations can be removed, to focus on drivers and event based mechanism.
 
-
 [:books: Read the full add-on documentation][docs]
 
 ## Development and release plans
 
 ### Alpha:
+
 - Aim:
   - Fast availability, easy and fast install and test
   - PnP support for USB (inc. multiple units)
@@ -84,24 +84,25 @@ As a result, many NUT limitations can be removed, to focus on drivers and event 
     - [ ] Apparmor & security
     - [ ] Add more translations (make a doc section!)
     - [ ] Dev & users feedback integration, issues fix and polishing
- 
+
 ### Beta:
+
 - Aim:
   - Improved reactivity (no more dual loop), lower footprint (CPU & RAM) and clean code (no more shell hack)
 - Requirements/solutions:
   - Finalize upstream SmartNUT: https://github.com/networkupstools/nut/projects/3
   - Switch SmartNUT Add-on to upstream SmartNUT
 - Roadmap:
-  - [ ]  0.6: 1rst functional prototype, using upstream SmartNUT, with Debian packages
-  - [ ]  0.7 - 0.9: users feedback integration, issues fix and polishing
+  - [ ] 0.6: 1rst functional prototype, using upstream SmartNUT, with Debian packages
+  - [ ] 0.7 - 0.9: users feedback integration, issues fix and polishing
 
 ### Stable
 
 - Aim: all Home Assistant SmartNUT Add-on Users happy :heart_eyes:
 - Roadmap:
-  - [ ]  1.0 - ...: ?
+  - [ ] 1.0 - ...: ?
 
---------------------------
+---
 
 A Network UPS Tools daemon to allow you to easily manage battery backup (UPS)
 devices connected to your Home Assistant machine.

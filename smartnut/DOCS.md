@@ -7,14 +7,14 @@ It lets you view their status, receives notifications about important events, an
 
 Conversely to previous NUT Add-on, SmartNUT:
 
-* just uses NUT drivers, and eliminates NUT upsd and client layers, and their configuration complexity
-* does not require an additional integration: native support in HA MQTT (hem, todo)
-* publishes the data to MQTT (with HA local broker autodetected).
-But can easily be adapted to any other broker/bus/method (HomeKit, ...)
-* support the following types of devices:
-    * USB: plug and play for (decent) USB device, including multiple ones
-    * SNMP, NetXML and NUT client (for remote NUT upsd server, like Synology NAS):
-      with manual edits, but will be eased by using nut-scanner too, as for USB
+- just uses NUT drivers, and eliminates NUT upsd and client layers, and their configuration complexity
+- does not require an additional integration: native support in HA MQTT (hem, todo)
+- publishes the data to MQTT (with HA local broker autodetected).
+  But can easily be adapted to any other broker/bus/method (HomeKit, ...)
+- support the following types of devices:
+  - USB: plug and play for (decent) USB device, including multiple ones
+  - SNMP, NetXML and NUT client (for remote NUT upsd server, like Synology NAS):
+    with manual edits, but will be eased by using nut-scanner too, as for USB
 
 ## About NUT
 
@@ -34,7 +34,7 @@ many [individuals and companies][nut-acknowledgements].
 ## Installation
 
 | WARNING: This is an early development version! You need to enable Advanced mode + HACS... at your own risk :wink: |
-|-------------------------------------------------------------------------------------------------------------------|
+| ----------------------------------------------------------------------------------------------------------------- |
 
 The installation of this add-on is pretty straightforward and not different in
 comparison to installing any other Home Assistant Community add-on.
@@ -45,19 +45,19 @@ https://www.home-assistant.io/common-tasks/os#installing-third-party-add-ons
 
 <!---
 1. If you don't have an MQTT broker yet; in Home Assistant go to **[Settings → Add-ons → Add-on store](https://my.home-assistant.io/redirect/supervisor_store/)** and install the **[Mosquitto broker](https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_mosquitto)** addon, then start it.
-1. Go back to the **Add-on store**, click **⋮ → Repositories**, fill in</br>  `https://github.com/zigbee2mqtt/hassio-zigbee2mqtt` and click **Add → Close** or click the **Add repository** button below, click **Add → Close** (You might need to enter the **internal IP address** of your Home Assistant instance first).  
+1. Go back to the **Add-on store**, click **⋮ → Repositories**, fill in</br>  `https://github.com/zigbee2mqtt/hassio-zigbee2mqtt` and click **Add → Close** or click the **Add repository** button below, click **Add → Close** (You might need to enter the **internal IP address** of your Home Assistant instance first).
 [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)]
 -->
 
-
-
 1. If you don't have an MQTT broker yet, follow these steps to get the Mosquitto add-on installed on your system:
-    1. Navigate in your Home Assistant frontend to **Settings** -> **Add-ons** -> **Add-on store**.
-    2. Find the "Mosquitto broker" add-on and click it.
-    3. Click on the "INSTALL" button, then start it.
+
+   1. Navigate in your Home Assistant frontend to **Settings** -> **Add-ons** -> **Add-on store**.
+   2. Find the "Mosquitto broker" add-on and click it.
+   3. Click on the "INSTALL" button, then start it.
    <!--[![Open Mosquitto add-on in your Home Assistant instance.][addon-badge]][addon-mosquitto]-->
 
    For more information, refer to **[Mosquitto broker](https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_mosquitto)** addon.
+
 2. Click the Home Assistant My button below to open the SmartNUT add-on on your Home
    Assistant instance.
    [![Open this add-on in your Home Assistant instance.][addon-badge]][addon]
@@ -65,15 +65,16 @@ https://www.home-assistant.io/common-tasks/os#installing-third-party-add-ons
 4. Configure SmartNUT if needed, as described belows.
 5. Start the "SmartNUT" add-on.
 6. Check the logs of the "SmartNUT" add-on to see if everything went well.
-7. Check the *How to use* below for integrating into Home Assistant MQTT.
+7. Check the _How to use_ below for integrating into Home Assistant MQTT.
 
 ## How to use
 
 For now:
-* just start SmartNUT (for USB) and/or use enable enable_simulated_device,
-* check the Journal tab for the startup sequence,
-* listen on MQTT topic 'homeassistant/nut/#' using MQTT integration (FIXME),
-* and have fun :smile:
+
+- just start SmartNUT (for USB) and/or use enable enable_simulated_device,
+- check the Journal tab for the startup sequence,
+- listen on MQTT topic 'homeassistant/nut/#' using MQTT integration (FIXME),
+- and have fun :smile:
 
 ## Configuration
 
@@ -84,8 +85,8 @@ advanced users.
 
 Note that the following are currently not implemented:
 
-* manually_edit_devices
-* autoconf_remote_nut_devices
+- manually_edit_devices
+- autoconf_remote_nut_devices
 
 <!--
 **Note**: _Remember to restart the add-on when the configuration is changed._
