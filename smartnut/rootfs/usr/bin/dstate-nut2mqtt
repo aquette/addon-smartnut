@@ -68,7 +68,7 @@ nut2mqtt_getconfig()
     if [ -f "/etc/nut/libnutdrv_mqtt.conf" ];
     then
         debug "OK: /etc/nut/libnutdrv_mqtt.conf"
-        # shellcheck source=/etc/nut/libnutdrv_mqtt.conf
+        # shellcheck disable=SC1091
         source /etc/nut/libnutdrv_mqtt.conf
     else
         debug "NO /etc/nut/libnutdrv_mqtt.conf"
