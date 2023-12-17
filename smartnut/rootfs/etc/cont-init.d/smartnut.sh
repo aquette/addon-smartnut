@@ -7,6 +7,7 @@
 readonly UPS_CONF=/etc/nut/ups.conf
 
 # FIXME: check if root is really needed? simple 'nut' should do
+# and is better for security
 chown root:root /var/run/nut
 chmod 0770 /var/run/nut
 
@@ -104,26 +105,23 @@ MQTT_HOST=""
 MQTT_USER=""
 MQTT_PASSWORD=""
 
-for mqtt_key in $(bashio::config "mqtt|keys"); do
-    if bashio::config.has_value "mqtt.server"; then
-        bashio::log.info "From user configuration"
-        MQTT_HOST=$(bashio::config "mqtt.server")
-    fi
-    if bashio::config.has_value "mqtt.user"; then
-        MQTT_USER=$(bashio::config "mqtt.user")
-    fi
-    if bashio::config.has_value "mqtt.password"; then
-        MQTT_PASSWORD=$(bashio::config "mqtt.password")
-    fi
-done
+if bashio::config.has_value "mqtt.server"; then
+    bashio::log.info "From user configuration"
+    MQTT_HOST=$(bashio::config "mqtt.server")
+fi
+if bashio::config.has_value "mqtt.user"; then
+    MQTT_USER=$(bashio::config "mqtt.user")
+fi
+if bashio::config.has_value "mqtt.password"; then
+    MQTT_PASSWORD=$(bashio::config "mqtt.password")
+fi
 if [ -z "$MQTT_HOST" ]; then
     bashio::log.info "From Home Assistant service"
     MQTT_HOST=$(bashio::services mqtt "host")
     MQTT_USER=$(bashio::services mqtt "username")
     MQTT_PASSWORD=$(bashio::services mqtt "password")
 fi
-
-# FIXME
+# FIXME: complete MQTT support
 #  - ca: str?
 #  - key: str?
 #  - cert: str?
