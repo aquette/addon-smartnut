@@ -159,7 +159,7 @@ process_dump()
 # Main
 # shellcheck disable=SC2034
 progname=$(basename "$0")
-debug "Starting $(progname)"
+debug "Starting $progname"
 debug "------------------------"
 
 # Setup context
@@ -179,19 +179,20 @@ do
             *.pid)
                 ;;
             *)
+                curdevice=$(basename "$device")
                 # Trim the driver part of the name (dummy-ups-smartnut-dummy)
                 # FIXME: complete drivers list
-                device_name=$(basename "$device" | sed 's/dummy-ups-//; s/usbhid-ups-//; s/nutdrv_qx-//; s/snmp-ups-//')
+                device_name=$(echo "$curdevice" | sed 's/dummy-ups-//; s/usbhid-ups-//; s/nutdrv_qx-//; s/snmp-ups-//')
 
                 echo -n "Processing device: $device_name: "
                 # FIXME: skip if failed to ping
-                ping_device "$device"
+                ping_device "$curdevice"
                 if [ $? -eq 1 ];
                 then
                     echo "no communication..."
                 fi
-                dump_device "$device"
-                process_dump "$device"
+                dump_device "$curdevice"
+                process_dump "$curdevice"
                 ;;
         esac
     done
