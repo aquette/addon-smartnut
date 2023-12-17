@@ -70,19 +70,19 @@ As a result, many NUT limitations can be removed, to focus on drivers and event 
 - Roadmap:
   - [x] 0.1: 1rst functional prototype (source)
   - [ ] 0.2:
-    - [ ] Add support for manually_edit_devices
+    - [x] Add support for manually_edit_devices
     - [ ] Fix user's MQTT configuration retrieval
     - [ ] Complete documentation
-    - [ ] Complete base translations (en, fr)
-    - [ ] Complete CICD builds
-    - [ ] Work on MQTT UPS integration in https://www.home-assistant.io/integrations/mqtt
+    - [x] Complete base translations (en, fr)
   - [ ] 0.3 - 0.5:
-    - Consider other publication methods, more direct with HA
-    - Add support for remote NUT server discovery and configuration (autoconf_remote_nut_devices)
-    - Ease SNMP and NetXML-UPS discovery and configuration
-    - Full integration with HA MQTT UPS
-    - Apparmor & security
-    - Dev & users feedback integration, issues fix and polishing
+    - [ ] Work on MQTT UPS integration in https://www.home-assistant.io/integrations/mqtt
+    - [ ] Consider other publication methods, more direct with HA
+    - [ ] Complete CICD builds
+    - [ ] Add support for remote NUT server discovery and configuration (autoconf_remote_nut_devices)
+    - [ ] Ease SNMP and NetXML-UPS discovery and configuration
+    - [ ] Full integration with HA MQTT UPS
+    - [ ] Apparmor & security
+    - [ ] Dev & users feedback integration, issues fix and polishing
  
 ### Beta:
 - Aim:

@@ -28,10 +28,38 @@ if bashio::config.true 'autoconf_usb_devices' ;then
     bashio::log.info "=> OK"
 fi
 
+# Process manual edits
 if bashio::config.true 'manual_edit_devices' ;then
 
-    bashio::log.info "manual_edit_devices"
-    # FIXME: process manual edits
+    bashio::log.info "Applying manual devices configuration"
+
+    for device in $(bashio::config "devices|keys"); do
+        upsname=$(bashio::config "devices[${device}].name")
+        upsdriver=$(bashio::config "devices[${device}].driver")
+        upsport=$(bashio::config "devices[${device}].port")
+        if bashio::config.has_value "devices[${device}].powervalue"; then
+            upspowervalue=$(bashio::config "devices[${device}].powervalue")
+        else
+            upspowervalue="1"
+        fi
+        # FIXME: not useful anymore (?)
+
+        bashio::log.info "Configuring Device named ${upsname}..."
+        {
+            echo
+            echo "[${upsname}]"
+            echo -e "\tdriver = ${upsdriver}"
+            echo -e "\tport = ${upsport}"
+        } >> "${UPS_CONF}"
+
+        OIFS=$IFS
+        IFS=$'\n'
+        for configitem in $(bashio::config "devices[${device}].config"); do
+            echo "  ${configitem}" >> "${UPS_CONF}"
+        done
+        IFS="$OIFS"
+    done
+    bashio::log.info "=> OK"
 fi
 
 if bashio::config.true 'enable_simulated_device' ;then
@@ -95,7 +123,7 @@ bashio::log.info  "${UPS_CONF}"
 cat "${UPS_CONF}"
 bashio::log.info "/etc/nut/libnutdrv_mqtt.conf"
 cat /etc/nut/libnutdrv_mqtt.conf
-# FIXME: -s sanity check
+# FIXME: -s sanity check for status
 bashio::log.info "=> OK"
 
 bashio::log.info "---------------------"
