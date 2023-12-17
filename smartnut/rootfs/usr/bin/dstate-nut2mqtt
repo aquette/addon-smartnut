@@ -53,8 +53,9 @@ ping_device()
 
 dump_device()
 {
-    #debug "* dump $1\n"
-    echo "DUMPALL" | netcat -w1 -U "/var/run/nut/$1" > "$device.newdump"
+    device="$1"
+    #debug "* dump $device\n"
+    echo "DUMPALL" | netcat -w1 -U "/var/run/nut/$device" > "$device.newdump"
     # FIXME: until = DUMPDONE
     #echo "-----------------------"
     #cat $device.newdump
