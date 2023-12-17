@@ -30,12 +30,12 @@ schema:
   autoconf_usb_devices: bool?
   manually_edit_devices: bool?
   devices:
-  - name: str?
-    driver: str?
-    port: str?
-    powervalue: int?
-    config:
-      - str?
+    - name: str?
+      driver: str?
+      port: str?
+      powervalue: int?
+      config:
+        - str?
   mqtt:
     - server: str?
     - ca: str?
