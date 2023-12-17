@@ -157,6 +157,7 @@ process_dump()
 }
 
 # Main
+# shellcheck disable=SC2034
 progname=$(basename "$0")
 debug "Starting $(progname)"
 debug "------------------------"
