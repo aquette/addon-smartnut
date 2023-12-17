@@ -54,7 +54,7 @@ ping_device()
 dump_device()
 {
     #debug "* dump $1\n"
-    echo "DUMPALL" | netcat -w1 -U "/var/run/nut/$1" > $device.newdump
+    echo "DUMPALL" | netcat -w1 -U "/var/run/nut/$1" > "$device.newdump"
     # FIXME: until = DUMPDONE
     #echo "-----------------------"
     #cat $device.newdump
@@ -157,7 +157,8 @@ process_dump()
 }
 
 # Main
-debug "Starting $(basename $0)"
+progname=$(basename "$0")
+debug "Starting $(progname)"
 debug "------------------------"
 
 # Setup context
