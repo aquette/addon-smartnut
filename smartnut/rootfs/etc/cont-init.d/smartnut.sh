@@ -122,11 +122,11 @@ for mqtt_key in $(bashio::config "mqtt|keys"); do
         MQTT_PASSWORD=$(bashio::config "mqtt.password")
     fi
 done
-if [ -z "$MQTT_HOST"]; then
+if [ -z "$MQTT_HOST" ]; then
     bashio::log.info "From Home Assistant service"
-        MQTT_HOST=$(bashio::services mqtt "host")
-        MQTT_USER=$(bashio::services mqtt "username")
-        MQTT_PASSWORD=$(bashio::services mqtt "password")
+    MQTT_HOST=$(bashio::services mqtt "host")
+    MQTT_USER=$(bashio::services mqtt "username")
+    MQTT_PASSWORD=$(bashio::services mqtt "password")
 fi
 
 # FIXME
