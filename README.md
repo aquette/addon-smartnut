@@ -56,34 +56,39 @@ As a result, many NUT limitations can be removed, to focus on drivers and event 
 ### Alpha:
 - Aim:
   - Fast availability, easy and fast install and test
-  - PnP support for USB, easier than before for others (still manual, but no more upsd.users) 
+  - PnP support for USB (inc. multiple units)
+  - Easier to configure than before for SNMP/NetXML-UPS/NUT (still manual, but no more upsd.users needed)
   - Provide a simulation device, for tests and developments
-  - collect UX feedback, issues and general improvements
+  - Collect UX feedback, issues and general improvements
 - Requirements/solutions:
-  - base image (Dockerfile) identical to the official NUT Add-on
-  - no git and compilation
+  - Base image (Dockerfile) identical to the official NUT Add-on
+  - No git and compilation
     - uses standard Debian packages ()
     - uses a shell hack (nut dstate + netcat)
-  - devices support at least identical to the official NUT Add-on
+  - Devices support at least identical to the official NUT Add-on
     USB (including multiple units), SNMP, NetXML-UPS. NUT remote as bonus
 - Roadmap:
   - [x] 0.1: 1rst functional prototype (source)
   - [ ] 0.2:
-    - add support for manually_edit_devices
-    - complete documentation, translations and CICD builds
-    - work on MQTT UPS integration in https://www.home-assistant.io/integrations/mqtt
+    - [ ] Add support for manually_edit_devices
+    - [ ] Fix user's MQTT configuration retrieval
+    - [ ] Complete documentation
+    - [ ] Complete base translations (en, fr)
+    - [ ] Complete CICD builds
+    - [ ] Work on MQTT UPS integration in https://www.home-assistant.io/integrations/mqtt
   - [ ] 0.3 - 0.5:
-    - add support for remote NUT server discovery and configuration (autoconf_remote_nut_devices)
-    - ease SNMP and NetXML-UPS discovery and configuration
+    - Consider other publication methods, more direct with HA
+    - Add support for remote NUT server discovery and configuration (autoconf_remote_nut_devices)
+    - Ease SNMP and NetXML-UPS discovery and configuration
     - Full integration with HA MQTT UPS
-    - dev & users feedback integration, issues fix and polishing
+    - Dev & users feedback integration, issues fix and polishing
  
 ### Beta:
 - Aim:
   - Improved reactivity (no more dual loop), lower footprint (CPU & RAM) and clean code
 - Requirements/solutions:
-  - develop upstream SmartNUT: https://github.com/networkupstools/nut/projects/3
-  - move to upstream SmartNUT
+  - Finalize upstream SmartNUT: https://github.com/networkupstools/nut/projects/3
+  - Switch SmartNUT Add-on to upstream SmartNUT
 - Roadmap:
   - [ ]  0.6: 1rst functional prototype, using upstream SmartNUT, with Debian packages
   - [ ]  0.7 - 0.9: users feedback integration, issues fix and polishing

@@ -7,7 +7,7 @@ It lets you view their status, receives notifications about important events, an
 
 Conversely to previous NUT Add-on, SmartNUT:
 
-* eliminates NUT upsd and client layers, and their configuration complexity
+* just uses NUT drivers, and eliminates NUT upsd and client layers, and their configuration complexity
 * does not require an additional integration: native support in HA MQTT (hem, todo)
 * publishes the data to MQTT (with HA local broker autodetected).
 But can easily be adapted to any other broker/bus/method (HomeKit, ...)
@@ -52,7 +52,8 @@ comparison to installing any other Home Assistant add-on.
     1. Navigate in your Home Assistant frontend to **Settings** -> **Add-ons** -> **Add-on store**.
     2. Find the "Mosquitto broker" add-on and click it.
     3. Click on the "INSTALL" button, then start it.
-   [![Open Mosquitto add-on in your Home Assistant instance.][addon-badge]][addon-mosquitto]
+   <!--[![Open Mosquitto add-on in your Home Assistant instance.][addon-badge]][addon-mosquitto]-->
+
    For more information, refer to **[Mosquitto broker](https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_mosquitto)** addon.
 2. Click the Home Assistant My button below to open the SmartNUT add-on on your Home
    Assistant instance.
@@ -390,6 +391,7 @@ FIXME
 [addon-badge]: https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg
 [addon]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Faquette%2Faddon-smartnut
 [addon-mosquitto]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fhome-assistant%2Faddons%2Ftree%2Fmaster%2Fmosquitto
+[aquette]: https://github.com/aquette
 [contributors]: https://github.com/aquette/addon-smartnut/graphs/contributors
 [critical-notif]: https://companion.home-assistant.io/docs/notifications/critical-notifications
 [dale3h]: https://github.com/dale3h

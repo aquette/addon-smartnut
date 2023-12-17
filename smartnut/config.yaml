@@ -24,8 +24,12 @@ options:
   autoconf_usb_devices: true
   manually_edit_devices: false
   devices: []
-  mqtt: []
+  mqtt:
+      - server: ""
+      - user: ""
+      - password: ""
 schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
   autoconf_usb_devices: bool?
   manually_edit_devices: bool?
   devices:
