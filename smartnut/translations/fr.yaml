@@ -1,0 +1,22 @@
+configuration:
+  log_level:
+    name: Niveau de journalisation
+    description: Contrôle le niveau de détails du journal fourni par le module complémentaire
+  autoconf_usb_devices:
+    name: Détecter et configurer automatiquement les appareils USB
+    description: Activer la découverte et la configuration automatiques des appareils USB.
+  manually_edit_devices:
+    name: Édition manuelle de la configuration des appareils
+    description: Permet l'édition manuelle de la configuration des appareils, pour remplacer les paramètres USB ou configurer des appareils distants (SNMP, NetXML ou client NUT).
+  devices:
+    name: Appareils
+    description: Configuration des appareils.
+  mqtt:
+    name: MQTT
+    description: Configuration de MQTT.
+  enable_simulated_device:
+    name: Créer un appareil simulé
+    description: Créer un appareil simulé « smartnut-dummy », avec des changements d'état automatiques (à des fins de développement et de test).
+  autoconf_remote_nut_devices:
+    name: Détecter et configurer automatiquement les appareils NUT distants
+    description: Activer la découverte et la configuration automatiques des appareils NUT distants (NON IMPLEMENTE).
