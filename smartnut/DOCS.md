@@ -78,15 +78,181 @@ For now:
 
 ## Configuration
 
-FIXME
-
 The add-on can be used with the basic configuration, with other options for more
 advanced users.
 
-Note that the following are currently not implemented:
+### Option: `log_level`
 
-- manually_edit_devices
-- autoconf_remote_nut_devices
+The `log_level` option controls the level of log output by the add-on and can
+be changed to be more or less verbose, which might be useful when you are
+dealing with an unknown issue. Possible values are:
+
+- `trace`: Show every detail, like all called internal functions.
+- `debug`: Shows detailed debug information.
+- `info`: Normal (usually) interesting events.
+- `warning`: Exceptional occurrences that are not errors.
+- `error`: Runtime errors that do not require immediate action.
+- `fatal`: Something went terribly wrong. Add-on becomes unusable.
+
+Please note that each level automatically includes log messages from a
+more severe level, e.g., `debug` also shows `info` messages. By default,
+the `log_level` is set to `info`, which is the recommended setting unless
+you are troubleshooting.
+
+### Option: `autoconf_usb_devices`
+
+This option enables the automatic discovery and configuration of USB devices,
+including multiple units.
+
+### Option: `manually_edit_devices`
+
+This option allows you to edit the `devices` configuration, in order to:
+
+* add a UPS that is not automatically detected, such as remote SNMP or serial,
+* fix autodetection issues, by disabling the related option (USB for example)
+and adding entries to the `devices` section.
+
+### Option: `devices`
+
+This option allows you to specify a list of UPS devices attached to your
+system.
+
+_Refer to the [`ups.conf(5)`][ups-conf] documentation for more information._
+
+#### Sub-option: `name`
+
+The name of the UPS. The name `default` is used internally, so you can’t use
+it in this file.
+
+#### Sub-option: `driver`
+
+This specifies which program will be monitoring this UPS. You need to specify
+the one that is compatible with your hardware. See [`nutupsdrv(8)`][nutupsdrv]
+for more information on drivers in general and pointers to the man pages of
+specific drivers.
+
+While the SmartNUT Add-on comes with all drivers supported by NUT, the following
+are the most interesting:
+
+* for USB devices: FIXME
+* for SNMP devices: FIXME
+* for remote NUT devices: FIXME
+
+#### Sub-option: `port`
+
+This is the communication port used by the driver to connect to the UPS, and varies
+according to devices:
+
+* for USB devices: use `auto`, and possibly set additional config
+* for SNMP devices: use `<ip_address-or_name>`, and possibly set additional config
+* for remote NUT devices: use `<device>@<ip_address-or_name>`, and possibly set additional config
+* for serial devices: use the port name, usually `/dev/ttyS0` for the first one
+
+#### Sub-option: `config`
+
+A list of additional [options][ups-fields] to configure for this UPS. The common
+[`usbhid-ups`][usbhid-ups] driver allows you to distinguish between devices by
+using a combination of the `vendor`, `product`, `serial`, `vendorid`, and
+`productid` options:
+
+
+#### Example configuration:
+
+```yaml
+devices:
+  - name: Eaton-3S
+    driver: usbhid-ups
+    port: auto
+    config:
+      - vendorid = 0463
+      - productid = FFFF
+      - serial = XXXXXXXXXXXXX
+  - name: Eaton-5PX
+    driver: usbhid-ups
+    port: auto
+    config:
+      - vendorid = 0463
+      - productid = FFFF
+      - serial = YYYYYYYYYYYYY
+  - name: apcups
+    driver: usbhid-ups
+    port: auto
+    config:
+      - vendorid = 051d
+  - name: SNMP-UPS
+    driver: snmp-ups
+    port: 192.168.1.142
+    config:
+      - community = private
+  - name: remoteNUT-Synology
+    driver: nutclient
+    port: 192.168.1.42
+```
+
+### Option: `mqtt`
+
+This option allows you to specify the configuration to connect to an MQTT broker.
+Leave empty when using the Mosquitto broker addon, since it is automatically
+detected.
+
+#### Sub-option: `server`
+
+The hostname of the MQTT broker.
+
+#### Sub-option: `port`
+
+The port of the MQTT broker.
+
+#### Sub-option: `user`
+
+The username to connect to the MQTT broker.
+
+#### Sub-option: `password`
+
+The password to connect to the MQTT broker.
+
+Note: If the `password` includes certain special characters (reserved by yaml
+specification), the enclosing quotes are required. So it is recommended to
+always quote it when in doubt.
+
+#### Sub-option: `ca`
+
+FIXME
+
+#### Sub-option: `key`
+
+FIXME
+
+#### Sub-option: `cert`
+
+FIXME
+
+#### Example configuration:
+
+```yaml
+server: 192.168.1.15:1883
+user: my_user
+password: "my_password"
+```
+
+### Option: `enable_simulated_device`
+
+This option enables the creation of a simulated device, for development and
+test purposes.
+
+The device is named `smartnut-dummy`, and includes automatic status changes
+(ups.status switches).
+
+For more information, refer to the following links:
+
+* [`dummy-ups(8)`][dummy-ups]
+* [`NUT Devices simulation`][nut-simulation]
+* [`NUT Devices Dumps Library`][nut-ddl]
+
+### Option: `autoconf_remote_nut_devices`
+
+This option enables the automatic discovery and configuration of remote NUT
+devices, including multiple units.
 
 <!--
 **Note**: _Remember to restart the add-on when the configuration is changed._
@@ -111,23 +277,9 @@ shutdown_host: "false"
 
 **Note**: _This is just an example, don't copy and paste it! Create your own!_
 
-### Option: `log_level`
 
-The `log_level` option controls the level of log output by the add-on and can
-be changed to be more or less verbose, which might be useful when you are
-dealing with an unknown issue. Possible values are:
 
-- `trace`: Show every detail, like all called internal functions.
-- `debug`: Shows detailed debug information.
-- `info`: Normal (usually) interesting events.
-- `warning`: Exceptional occurrences that are not errors.
-- `error`: Runtime errors that do not require immediate action.
-- `fatal`: Something went terribly wrong. Add-on becomes unusable.
 
-Please note that each level automatically includes log messages from a
-more severe level, e.g., `debug` also shows `info` messages. By default,
-the `log_level` is set to `info`, which is the recommended setting unless
-you are troubleshooting.
 
 ### Option: `users`
 
@@ -166,68 +318,7 @@ Add the necessary actions for a `upsmon` process to work. This is either set to
 `master` or `slave`. If creating an account for a `netclient` setup to connect
 this should be set to `slave`.
 
-### Option: `devices`
 
-This option allows you to specify a list of UPS devices attached to your
-system.
-
-_Refer to the [`ups.conf(5)`][ups-conf] documentation for more information._
-
-#### Sub-option: `name`
-
-The name of the UPS. The name `default` is used internally, so you can’t use
-it in this file.
-
-#### Sub-option: `driver`
-
-This specifies which program will be monitoring this UPS. You need to specify
-the one that is compatible with your hardware. See [`nutupsdrv(8)`][nutupsdrv]
-for more information on drivers in general and pointers to the man pages of
-specific drivers.
-
-#### Sub-option: `port`
-
-This is the serial port where the UPS is connected. The first serial port
-usually is `/dev/ttyS0`. Use `auto` to automatically detect the port.
-
-#### Sub-option: `powervalue`
-
-Optionally lets you set whether this particular UPS provides power to the
-device this add-on is running on. Useful if you have multiple UPS that you
-wish to monitor, but you don't want low battery on some of them to shut down
-this host. Acceptable values are `1` for "providing power to this host" or `0`
-for "monitor only". Defaults to `1`
-
-#### Sub-option: `config`
-
-A list of additional [options][ups-fields] to configure for this UPS. The common
-[`usbhid-ups`][usbhid-ups] driver allows you to distinguish between devices by
-using a combination of the `vendor`, `product`, `serial`, `vendorid`, and
-`productid` options:
-
-```yaml
-devices:
-  - name: mge
-    driver: usbhid-ups
-    port: auto
-    config:
-      - vendorid = 0463
-  - name: apcups
-    driver: usbhid-ups
-    port: auto
-    config:
-      - vendorid = 051d*
-  - name: foocorp
-    driver: usbhid-ups
-    port: auto
-    config:
-      - vendor = "Foo.Corporation.*"
-  - name: smartups
-    driver: usbhid-ups
-    port: auto
-    config:
-      - product = ".*(Smart|Back)-?UPS.*"
-```
 
 ### Option: `mode`
 
@@ -327,7 +418,10 @@ See the below table for more information as well as the message that will be in
 
 This event allows you to create automations to do things like send a
 [critical notification][critical-notif] to your phone:
+-->
 
+
+<!--
 ```yaml
 automations:
   - alias: "UPS changed state"
@@ -350,6 +444,11 @@ automations:
 For more information, see the NUT docs [here][nut-notif-doc-1] and
 [here][nut-notif-doc-2].
 -->
+
+## Example automations
+
+FIXME
+
 
 ## Changelog & Releases
 
@@ -413,14 +512,17 @@ limitations under the License.
 [dale3h]: https://github.com/dale3h
 [discord-ha]: https://discord.gg/c5DvZ4e
 [discord]: https://discord.me/hassioaddons
+[dummy-ups]: https://networkupstools.org/docs/man/dummy-ups.html
 [forum]: https://community.home-assistant.io/t/community-hass-io-add-on-network-ups-tools/68516
 [issue]: https://github.com/aquette/addon-smartnut/issues
 [nut-acknowledgements]: https://networkupstools.org/acknowledgements.html
 [nut-compatible]: https://networkupstools.org/stable-hcl.html
 [nut-conf]: https://networkupstools.org/docs/man/nut.conf.html
+[nut-ddl]: https://networkupstools.org/ddl/index.html#_supported_devices
 [nut-features]: https://networkupstools.org/features.html
 [nut-notif-doc-1]: https://networkupstools.org/docs/user-manual.chunked/ar01s07.html
 [nut-notif-doc-2]: https://networkupstools.org/docs/man/upsmon.conf.html
+[nut-simulation]: https://networkupstools.org/docs/developer-guide.chunked/dev-tools.html#dev-simu
 [nutupsdrv]: https://networkupstools.org/docs/man/nutupsdrv.html
 [reddit]: https://reddit.com/r/homeassistant
 [releases]: https://github.com/hassio-addons/addon-nut/releases
