@@ -108,9 +108,9 @@ including multiple units.
 
 This option allows you to edit the `devices` configuration, in order to:
 
-* add a UPS that is not automatically detected, such as remote SNMP or serial,
-* fix autodetection issues, by disabling the related option (USB for example)
-and adding entries to the `devices` section.
+- add a UPS that is not automatically detected, such as remote SNMP or serial,
+- fix autodetection issues, by disabling the related option (USB for example)
+  and adding entries to the `devices` section.
 
 ### Option: `devices`
 
@@ -134,19 +134,19 @@ specific drivers.
 While the SmartNUT Add-on comes with all drivers supported by NUT, the following
 are the most interesting:
 
-* for USB devices: FIXME
-* for SNMP devices: FIXME
-* for remote NUT devices: FIXME
+- for USB devices: FIXME
+- for SNMP devices: FIXME
+- for remote NUT devices: FIXME
 
 #### Sub-option: `port`
 
 This is the communication port used by the driver to connect to the UPS, and varies
 according to devices:
 
-* for USB devices: use `auto`, and possibly set additional config
-* for SNMP devices: use `<ip_address-or_name>`, and possibly set additional config
-* for remote NUT devices: use `<device>@<ip_address-or_name>`, and possibly set additional config
-* for serial devices: use the port name, usually `/dev/ttyS0` for the first one
+- for USB devices: use `auto`, and possibly set additional config
+- for SNMP devices: use `<ip_address-or_name>`, and possibly set additional config
+- for remote NUT devices: use `<device>@<ip_address-or_name>`, and possibly set additional config
+- for serial devices: use the port name, usually `/dev/ttyS0` for the first one
 
 #### Sub-option: `config`
 
@@ -154,7 +154,6 @@ A list of additional [options][ups-fields] to configure for this UPS. The common
 [`usbhid-ups`][usbhid-ups] driver allows you to distinguish between devices by
 using a combination of the `vendor`, `product`, `serial`, `vendorid`, and
 `productid` options:
-
 
 #### Example configuration:
 
@@ -245,9 +244,9 @@ The device is named `smartnut-dummy`, and includes automatic status changes
 
 For more information, refer to the following links:
 
-* [`dummy-ups(8)`][dummy-ups]
-* [`NUT Devices simulation`][nut-simulation]
-* [`NUT Devices Dumps Library`][nut-ddl]
+- [`dummy-ups(8)`][dummy-ups]
+- [`NUT Devices simulation`][nut-simulation]
+- [`NUT Devices Dumps Library`][nut-ddl]
 
 ### Option: `autoconf_remote_nut_devices`
 
@@ -420,7 +419,6 @@ This event allows you to create automations to do things like send a
 [critical notification][critical-notif] to your phone:
 -->
 
-
 <!--
 ```yaml
 automations:
@@ -448,7 +446,6 @@ For more information, see the NUT docs [here][nut-notif-doc-1] and
 ## Example automations
 
 FIXME
-
 
 ## Changelog & Releases
 
