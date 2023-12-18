@@ -1,24 +1,24 @@
 # Home Assistant Community Add-on: SmartNUT
 
-SmartNUT is a refreshed form-factor of NUT - Network UPS Tools - suited to modern integrations and smart systems, like Home Assistant.
+SmartNUT is a refreshed form-factor of NUT - [Network UPS Tools][nut] - suited to modern integrations and smart systems, like Home Assistant.
 
-SmartNUT allows you to monitor and manage UPS (battery backup) using a NUT server.
+SmartNUT allows you to monitor and manage UPS (battery backup) using NUT drivers.
 It lets you view their status, receives notifications about important events, and execute commands as device actions.
 
-Conversely to previous NUT Add-on, SmartNUT:
+Conversely to the historic NUT Add-on, SmartNUT:
 
 - just uses NUT drivers, and eliminates NUT upsd and client layers, and their configuration complexity
 - does not require an additional integration: native support in HA MQTT (hem, todo)
 - publishes the data to MQTT (with HA local broker autodetected).
   But can easily be adapted to any other broker/bus/method (HomeKit, ...)
-- support the following types of devices:
+- supports the following types of devices:
   - USB: plug and play for (decent) USB device, including multiple ones
   - SNMP, NetXML and NUT client (for remote NUT upsd server, like Synology NAS):
     with manual edits, but will be eased by using nut-scanner too, as for USB
 
 ## About NUT
 
-The primary goal of the Network UPS Tools (NUT) project is to provide support
+The primary goal of the [Network UPS Tools (NUT)][nut] project is to provide support
 for Power Devices, such as Uninterruptible Power Supplies, Power Distribution
 Units, Automatic Transfer Switch, Power Supply Units and Solar Controllers.
 
@@ -36,17 +36,15 @@ many [individuals and companies][nut-acknowledgements].
 | WARNING: This is an early development version! It is subject to change and may require advanced Home Assistant knowledges |
 | ------------------------------------------------------------------------------------------------------------------------- |
 
+<!--
+**Note**: _Remember to restart the add-on when the configuration is changed._
+-->
+
 The installation of this add-on is pretty straightforward and not different in
 comparison to installing any other Home Assistant Community add-on.
 
-<!--
+<!-- FIXME
 https://www.home-assistant.io/common-tasks/os#installing-third-party-add-ons
--->
-
-<!---
-1. If you don't have an MQTT broker yet; in Home Assistant go to **[Settings → Add-ons → Add-on store](https://my.home-assistant.io/redirect/supervisor_store/)** and install the **[Mosquitto broker](https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_mosquitto)** addon, then start it.
-1. Go back to the **Add-on store**, click **⋮ → Repositories**, fill in</br>  `https://github.com/zigbee2mqtt/hassio-zigbee2mqtt` and click **Add → Close** or click the **Add repository** button below, click **Add → Close** (You might need to enter the **internal IP address** of your Home Assistant instance first).
-[![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)]
 -->
 
 1. If you don't have an MQTT broker yet, follow these steps to get the Mosquitto add-on installed on your system:
@@ -73,7 +71,8 @@ For now:
 
 - just start SmartNUT (for USB) and/or use enable enable_simulated_device,
 - check the Journal tab for the startup sequence,
-- listen on MQTT topic 'homeassistant/nut/#' using MQTT integration (FIXME),
+- listen on MQTT topic 'homeassistant/nut/#' using MQTT integration
+<!-- FIXME: provide procedure and more info -->
 - and have fun :smile:
 
 ## Configuration
@@ -150,12 +149,20 @@ according to devices:
 
 #### Sub-option: `config`
 
-A list of additional [options][ups-fields] to configure for this UPS. The common
-[`usbhid-ups`][usbhid-ups] driver allows you to distinguish between devices by
-using a combination of the `vendor`, `product`, `serial`, `vendorid`, and
-`productid` options:
+A list of additional [options][ups-fields] to configure for this UPS.
+
+Note:
+
+- The generic [`usbhid-ups`][usbhid-ups] driver allows you to distinguish
+between devices by using a combination of the `vendorid`, `productid` and `serial` options.
+
+- The generic [`snmp-ups`][snmp-ups] driver may need additional information to
+connect to the SNMP agent, such as the `snmp_version`, `community`, `secName` or others
+SNMPv3 options.
 
 #### Example configuration:
+
+<!-- FIXME: desc field... -->
 
 ```yaml
 devices:
@@ -173,20 +180,33 @@ devices:
       - vendorid = 0463
       - productid = FFFF
       - serial = YYYYYYYYYYYYY
-  - name: apcups
+  - name: APCUPS
     driver: usbhid-ups
     port: auto
     config:
       - vendorid = 051d
-  - name: SNMP-UPS
+  - name: SNMP-UPSv1
     driver: snmp-ups
     port: 192.168.1.142
     config:
+      - snmp_version = v1
       - community = private
+  - name: SNMP-UPSv3
+    driver: snmp-ups
+    port: 192.168.1.142
+    config:
+      - snmp_version = v3
+      - community = private
+      - secName = mysecname
+      - authPassword = "@123456"
   - name: remoteNUT-Synology
     driver: nutclient
     port: smartnut@192.168.1.42
 ```
+
+Note: If password values, such as `authPassword`, include certain special
+characters (reserved by yaml specification), the enclosing quotes are required.
+So it is recommended to always quote it when in doubt.
 
 ### Option: `mqtt`
 
@@ -253,171 +273,6 @@ For more information, refer to the following links:
 This option enables the automatic discovery and configuration of remote NUT
 devices, including multiple units.
 
-<!--
-**Note**: _Remember to restart the add-on when the configuration is changed._
-
-SmartNUT add-on configuration:
-
-```yaml
-users:
-  - username: nutty
-    password: changeme
-    instcmds:
-      - all
-    actions: []
-devices:
-  - name: myups
-    driver: usbhid-ups
-    port: auto
-    config: []
-mode: netserver
-shutdown_host: "false"
-```
-
-**Note**: _This is just an example, don't copy and paste it! Create your own!_
-
-
-
-
-
-### Option: `users`
-
-This option allows you to specify a list of one or more users. Each user can
-have its own privileges like defined in the sub-options below.
-
-_Refer to the [`upsd.users(5)`][upsd-users] documentation for more information._
-
-#### Sub-option: `username`
-
-The username the user needs to use to login to the NUT server. A valid username
-contains only `a-z`, `A-Z`, `0-9` and underscore characters (`_`).
-
-#### Sub-option: `password`
-
-Set the password for this user.
-
-#### Sub-option: `instcmds`
-
-A list of instant commands that a user is allowed to initiate. Use `all` to
-grant all commands automatically.
-
-#### Sub-option: `actions`
-
-A list of actions that a user is allowed to perform. Valid actions are:
-
-- `set`: change the value of certain variables in the UPS.
-- `fsd`: set the forced shutdown flag in the UPS. This is equivalent to an
-  "on battery + low battery" situation for the purposes of monitoring.
-
-The list of actions is expected to grow in the future.
-
-#### Sub-option: `upsmon`
-
-Add the necessary actions for a `upsmon` process to work. This is either set to
-`master` or `slave`. If creating an account for a `netclient` setup to connect
-this should be set to `slave`.
-
-
-
-### Option: `mode`
-
-Recognized values are `netserver` and `netclient`.
-
-- `netserver`: Runs the components needed to manage a locally connected UPS and
-  allow other clients to connect (either as slaves or for management).
-- `netclient`: Only runs `upsmon` to connect to a remote system running as
-  `netserver`.
-
-### Option: `shutdown_host`
-
-When this option is set to `true` on a UPS shutdown command, the host system
-will be shutdown. When set to `false` only the add-on will be stopped. This is to
-allow testing without impact to the system.
-
-### Option: `list_usb_devices`
-
-When this option is set to `true`, a list of connected USB devices will be
-displayed in the add-on log when the add-on starts up. This option can be used
-to help identify different UPS devices when multiple UPS devices are connected
-to the system.
-
-### Option: `remote_ups_name`
-
-When running in `netclient` mode, the name of the remote UPS.
-
-### Option: `remote_ups_host`
-
-When running in `netclient` mode, the host of the remote UPS.
-
-### Option: `remote_ups_user`
-
-When running in `netclient` mode, the user of the remote UPS.
-
-### Option: `remote_ups_password`
-
-When running in `netclient` mode, the password of the remote UPS.
-
-**Note**: _When using the remote option, the user and device options must still
-be present, however they will have no effect_
-
-### Option: `upsd_maxage`
-
-Allows setting the MAXAGE value in upsd.conf to increase the timeout for
-specific drivers, should not be changed for the majority of users.
-
-### Option: `upsmon_deadtime`
-
-Allows setting the DEADTIME value in upsmon.conf to adjust the stale time for
-the monitor process, should not be changed for the majority of users.
-
-### Option: `i_like_to_be_pwned`
-
-Adding this option to the add-on configuration allows to you bypass the
-HaveIBeenPwned password requirement by setting it to `true`.
-
-**Note**: _We STRONGLY suggest picking a stronger/safer password instead of
-using this option! USE AT YOUR OWN RISK!_
-
-### Option: `leave_front_door_open`
-
-Adding this option to the add-on configuration allows you to disable
-authentication on the NUT server by setting it to `true` and leaving the
-username and password empty.
-
-**Note**: _We STRONGLY suggest, not to use this, even if this add-on is
-only exposed to your internal network. USE AT YOUR OWN RISK!_
-
-## Event Notifications
-
-Whenever your UPS changes state, an event named `nut.ups_event` will be fired.
-It's payload looks like this:
-
-| Key           | Value                                        |
-| ------------- | -------------------------------------------- |
-| `ups_name`    | The name of the UPS as you configured it     |
-| `notify_type` | The type of notification                     |
-| `notify_msg`  | The NUT default message for the notification |
-
-`notify_type` signifies what kind of notification it is.
-See the below table for more information as well as the message that will be in
-`notify_msg`. `%s` is automatically replaced by NUT with your UPS name.
-
-| Type       | Cause                                                                 | Default Message                                    |
-| ---------- | --------------------------------------------------------------------- | -------------------------------------------------- |
-| `ONLINE`   | UPS is back online                                                    | "UPS %s on line power"                             |
-| `ONBATT`   | UPS is on battery                                                     | "UPS %s on battery"                                |
-| `LOWBATT`  | UPS has a low battery (if also on battery, it's "critical")           | "UPS %s battery is low"                            |
-| `FSD`      | UPS is being shutdown by the master (FSD = "Forced Shutdown")         | "UPS %s: forced shutdown in progress"              |
-| `COMMOK`   | Communications established with the UPS                               | "Communications with UPS %s established"           |
-| `COMMBAD`  | Communications lost to the UPS                                        | "Communications with UPS %s lost"                  |
-| `SHUTDOWN` | The system is being shutdown                                          | "Auto logout and shutdown proceeding"              |
-| `REPLBATT` | The UPS battery is bad and needs to be replaced                       | "UPS %s battery needs to be replaced"              |
-| `NOCOMM`   | A UPS is unavailable (can't be contacted for monitoring)              | "UPS %s is unavailable"                            |
-| `NOPARENT` | The process that shuts down the system has died (shutdown impossible) | "upsmon parent process died - shutdown impossible" |
-
-This event allows you to create automations to do things like send a
-[critical notification][critical-notif] to your phone:
--->
 
 <!--
 ```yaml
@@ -446,6 +301,12 @@ For more information, see the NUT docs [here][nut-notif-doc-1] and
 ## Example automations
 
 FIXME
+
+Note that it is currently not possible to send commands to the UPS, nor
+to apply settings.
+
+It is however already possibly to react through the values published on
+MQTT.
 
 ## Changelog & Releases
 
@@ -512,6 +373,7 @@ limitations under the License.
 [dummy-ups]: https://networkupstools.org/docs/man/dummy-ups.html
 [forum]: https://community.home-assistant.io/t/community-hass-io-add-on-network-ups-tools/68516
 [issue]: https://github.com/aquette/addon-smartnut/issues
+[nut]: https://networkupstools.org
 [nut-acknowledgements]: https://networkupstools.org/acknowledgements.html
 [nut-compatible]: https://networkupstools.org/stable-hcl.html
 [nut-conf]: https://networkupstools.org/docs/man/nut.conf.html
