@@ -33,8 +33,8 @@ many [individuals and companies][nut-acknowledgements].
 
 ## Installation
 
-| WARNING: This is an early development version! You need to enable Advanced mode + HACS... at your own risk :wink: |
-| ----------------------------------------------------------------------------------------------------------------- |
+| WARNING: This is an early development version! It is subject to change and may require advanced Home Assistant knowledges |
+| ------------------------------------------------------------------------------------------------------------------------- |
 
 The installation of this add-on is pretty straightforward and not different in
 comparison to installing any other Home Assistant Community add-on.
@@ -132,11 +132,11 @@ for more information on drivers in general and pointers to the man pages of
 specific drivers.
 
 While the SmartNUT Add-on comes with all drivers supported by NUT, the following
-are the most interesting:
+are probably the most interesting:
 
-* for USB devices: FIXME
-* for SNMP devices: FIXME
-* for remote NUT devices: FIXME
+* for USB devices: [`usbhid-ups(8)`][usbhid-ups] and [`nutdrv_qx(8)`][nutdrv_qx]
+* for SNMP devices: [`snmp-ups(8)`][snmp-ups]
+* for remote NUT devices: [`dummy-ups(8)`][dummy-ups]
 
 #### Sub-option: `port`
 
@@ -186,7 +186,7 @@ devices:
       - community = private
   - name: remoteNUT-Synology
     driver: nutclient
-    port: 192.168.1.42
+    port: smartnut@192.168.1.42
 ```
 
 ### Option: `mqtt`
@@ -523,11 +523,13 @@ limitations under the License.
 [nut-notif-doc-1]: https://networkupstools.org/docs/user-manual.chunked/ar01s07.html
 [nut-notif-doc-2]: https://networkupstools.org/docs/man/upsmon.conf.html
 [nut-simulation]: https://networkupstools.org/docs/developer-guide.chunked/dev-tools.html#dev-simu
+[nutdrv_qx]: https://networkupstools.org/docs/man/nutdrv_qx.html
 [nutupsdrv]: https://networkupstools.org/docs/man/nutupsdrv.html
 [reddit]: https://reddit.com/r/homeassistant
 [releases]: https://github.com/hassio-addons/addon-nut/releases
 [semver]: https://semver.org/spec/v2.0.0
 [sleep]: https://linux.die.net/man/1/sleep
+[snmp-ups]: https://networkupstools.org/docs/man/snmp-ups.html
 [ups-conf]: https://networkupstools.org/docs/man/ups.conf.html
 [ups-fields]: https://networkupstools.org/docs/man/ups.conf.html#_ups_fields
 [upsd-conf]: https://networkupstools.org/docs/man/upsd.conf.html
