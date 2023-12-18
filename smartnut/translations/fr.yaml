@@ -16,7 +16,9 @@ configuration:
     description: Configuration des appareils.
   mqtt:
     name: MQTT
-    description: Configuration de MQTT.
+    description: >-
+      Configuration de MQTT.
+      Laissez vide lorsque vous utilisez le module complémentaire Mosquitto, car il est automatiquement détecté.
   enable_simulated_device:
     name: Créer un appareil simulé
     description: >-

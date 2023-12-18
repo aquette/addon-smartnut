@@ -15,7 +15,9 @@ configuration:
     description: Devices configuration.
   mqtt:
     name: MQTT
-    description: MQTT configuration.
+    description: >-
+      MQTT configuration.
+      Leave empty when using the Mosquitto broker addon, since it is automatically detected.
   enable_simulated_device:
     name: Create a simulated device
     description: >-
