@@ -199,7 +199,7 @@ our [GitHub Repository][repository].
 [nut-compatible]: https://networkupstools.org/stable-hcl.html
 [nut-features]: https://networkupstools.org/features.html
 [nut-ha-docs]: https://www.home-assistant.io/integrations/smartnut/
-[project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
+[project-stage-shield]: https://img.shields.io/badge/project%20stage-alpha-yellow.svg
 [reddit]: https://reddit.com/r/homeassistant
 [releases-shield]: https://img.shields.io/github/release/aquette/addon-smartnut.svg
 [releases]: https://github.com/aquette/addon-smartnut/releases
