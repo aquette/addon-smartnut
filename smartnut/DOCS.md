@@ -138,8 +138,8 @@ are probably the most interesting:
 - for USB devices: [`usbhid-ups(8)`][usbhid-ups] and [`nutdrv_qx(8)`][nutdrv_qx]
 - for SNMP devices: [`snmp-ups(8)`][snmp-ups]
 - for remote NUT devices: [`dummy-ups(8)`][dummy-ups]
-Note that `dummy-ups` replaces the `netclient` option, from the historic NUT Add-on,
-by repeating the remote device data as if it was connected locally.
+  Note that `dummy-ups` replaces the `netclient` option, from the historic NUT Add-on,
+  by repeating the remote device data as if it was connected locally.
 
 #### Sub-option: `port`
 
