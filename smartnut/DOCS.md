@@ -154,11 +154,11 @@ A list of additional [options][ups-fields] to configure for this UPS.
 Note:
 
 - The generic [`usbhid-ups`][usbhid-ups] driver allows you to distinguish
-between devices by using a combination of the `vendorid`, `productid` and `serial` options.
+  between devices by using a combination of the `vendorid`, `productid` and `serial` options.
 
 - The generic [`snmp-ups`][snmp-ups] driver may need additional information to
-connect to the SNMP agent, such as the `snmp_version`, `community`, `secName` or others
-SNMPv3 options.
+  connect to the SNMP agent, such as the `snmp_version`, `community`, `secName` or others
+  SNMPv3 options.
 
 #### Example configuration:
 
@@ -272,7 +272,6 @@ For more information, refer to the following links:
 
 This option enables the automatic discovery and configuration of remote NUT
 devices, including multiple units.
-
 
 <!--
 ```yaml
