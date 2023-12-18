@@ -188,7 +188,7 @@ our [GitHub Repository][repository].
 [discord]: https://discord.me/hassioaddons
 [docs]: https://github.com/aquette/addon-smartnut/blob/main/smartnut/DOCS.md
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
-[forum]: https://community.home-assistant.io/t/community-hass-io-add-on-network-ups-tools/68516
+[forum]: https://community.home-assistant.io/
 [github-actions-shield]: https://github.com/aquette/addon-smartnut/workflows/CI/badge.svg
 [github-actions]: https://github.com/aquette/addon-smartnut/actions
 [i386-shield]: https://img.shields.io/badge/i386-no-red.svg

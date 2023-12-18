@@ -38,10 +38,11 @@ schema:
         - str?
   mqtt:
     server: str?
+    port: port?
+    user: str?
+    password: str?
     ca: str?
     key: str?
     cert: str?
-    user: str?
-    password: str?
   enable_simulated_device: bool?
   autoconf_remote_nut_devices: bool?
