@@ -36,6 +36,8 @@ many [individuals and companies][nut-acknowledgements].
 | WARNING: This is an early development version! It is subject to change and may require advanced Home Assistant knowledges |
 | ------------------------------------------------------------------------------------------------------------------------- |
 
+<!-- FIXME: alpha notice §## + call to test / translation / feedback -->
+
 <!--
 **Note**: _Remember to restart the add-on when the configuration is changed._
 -->
@@ -136,6 +138,8 @@ are probably the most interesting:
 - for USB devices: [`usbhid-ups(8)`][usbhid-ups] and [`nutdrv_qx(8)`][nutdrv_qx]
 - for SNMP devices: [`snmp-ups(8)`][snmp-ups]
 - for remote NUT devices: [`dummy-ups(8)`][dummy-ups]
+Note that `dummy-ups` replaces the `netclient` option, from the historic NUT Add-on,
+by repeating the remote device data as if it was connected locally.
 
 #### Sub-option: `port`
 
@@ -272,6 +276,9 @@ For more information, refer to the following links:
 
 This option enables the automatic discovery and configuration of remote NUT
 devices, including multiple units.
+
+It replaces the `netclient` option, from the historic NUT Add-on, by repeating
+the remote device data as if it was connected locally.
 
 <!--
 ```yaml
