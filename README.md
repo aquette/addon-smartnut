@@ -69,22 +69,24 @@ As a result, many NUT limitations can be removed, to focus on drivers and event 
     USB (including multiple units), SNMP, NetXML-UPS. NUT remote as bonus
 - Roadmap:
   - [x] 0.1: 1rst functional prototype (source, autodetected USB + simulation)
-  - [ ] 0.2:
+  - [x] 0.2:
     - [x] Add support for manually_edit_devices
     - [x] Fix user's MQTT configuration retrieval
-    - [ ] Complete documentation
+    - [x] Complete documentation
     - [x] Complete base translations (en, fr)
     - [x] Add support for remote NUT server discovery and configuration (autoconf_remote_nut_devices)
     - [x] Complete CICD builds
-  - [ ] 0.3 - 0.5:
+  - [ ] 0.3
     - [x] Complete CICD deploys
     - [ ] Complete support for remote NUT server discovery and configuration (autoconf_remote_nut_devices)
+    - [ ] Apparmor & security
+    - [ ] Add more translations (make a doc section!)
+    - [ ] Dev & users feedback integration, issues fix and polishing
+  - [ ] 0.4 - 0.5:
     - [ ] Work on MQTT full UPS integration in https://www.home-assistant.io/integrations/mqtt
     - [ ] Consider other publication methods, more direct with HA
     - [ ] Ease SNMP and NetXML-UPS discovery and configuration.
           Options for autoconf_snmp_devices & autoconf_netxml_devices (?)
-    - [ ] Apparmor & security
-    - [ ] Add more translations (make a doc section!)
     - [ ] Dev & users feedback integration, issues fix and polishing
 
 ### Beta:
