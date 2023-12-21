@@ -191,6 +191,10 @@ do
                 if [ $? -eq 1 ];
                 then
                     echo "no communication..."
+                    # FIXME: USB tends to disconnect! Investigate and try to reconnect
+                    ls -la /var/run/nut/
+                    echo "---"
+                    lsusb
                 fi
                 dump_device "$curdevice"
                 process_dump "$curdevice"
