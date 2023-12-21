@@ -166,7 +166,7 @@ Note:
 
 #### Example configuration:
 
-<!-- FIXME: desc field... -->
+<!-- FIXME: desc field... + split into multiple examples -->
 
 ```yaml
 devices:
@@ -240,15 +240,15 @@ always quote it when in doubt.
 
 #### Sub-option: `ca`
 
-FIXME
+Not yet implemented!
 
 #### Sub-option: `key`
 
-FIXME
+Not yet implemented!
 
 #### Sub-option: `cert`
 
-FIXME
+Not yet implemented!
 
 #### Example configuration:
 

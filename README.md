@@ -1,9 +1,13 @@
 <div align="center">
-    <a href="https://github.com/aquette/smartnut">
+    <a href="https://github.com/aquette/addon-smartnut">
         <img width="150" height="150" src="smartnut/logo.png">
     </a>
     <br>
     <h1>Home Assistant Community Add-on: SmartNUT</h1>
+    <br>
+	  <a target="_blank" href="https://github.com/aquette/addon-smartnut/releases">
+		  <img src="https://img.shields.io/github/downloads/aquette/addon-smartnut/total.svg" alt="Releases Downloads">
+	  </a>
 </div>
 
 [![GitHub Release][releases-shield]][releases]
@@ -88,7 +92,7 @@ As a result, many NUT limitations can be removed, to focus on drivers and event 
 ### Beta:
 
 - Aim:
-  - Improved reactivity (no more dual loop), lower footprint (CPU & RAM) and clean code (no more shell hack)
+  - General improvements: stability, reactivity (no more dual loop), footprint (lower CPU) and clean code (no more shell hack)
 - Requirements/solutions:
   - Finalize upstream SmartNUT: https://github.com/networkupstools/nut/projects/3
   - Switch SmartNUT Add-on to upstream SmartNUT
