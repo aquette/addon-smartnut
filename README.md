@@ -92,9 +92,11 @@ As a result, many NUT limitations can be removed, to focus on drivers and event 
 - Roadmap:
   - [ ] 0.3
     - [x] Complete CICD deployments
+    - [ ] Start advertizing
     - [ ] Improve MQTT integration (better topic and payload, config announce, ...)
+    - [ ] Move upsdrvctl & dstate-nut2mqtt as s6 services (may solve USB issues)
     - [ ] Test and ensure addon resilience and robustness (esp. WRT USB / remote devices disconnection)
-    - [ ] Complete support for remote NUT server discovery and configuration (autoconf_remote_nut_devices). Move upsdrvctl & dstate-nut2mqtt as s6 services?
+    - [ ] Complete support for remote NUT server discovery and configuration (autoconf_remote_nut_devices).
     - [ ] Apparmor & security
     - [ ] Add more translations if possible (make a doc section to ease contributions!)
     - [ ] Dev & users feedback integration, issues fix and polishing
