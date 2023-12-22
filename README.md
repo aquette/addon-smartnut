@@ -80,23 +80,24 @@ As a result, many NUT limitations can be removed, to focus on drivers and event 
     - [x] Complete base translations (en, fr)
     - [x] Add support for remote NUT server discovery and configuration (autoconf_remote_nut_devices)
     - [x] Complete CICD builds
-  - [ ] 0.3
-    - [x] Complete CICD deployments
-    - [ ] Improve MQTT integration (better topic and payload, config announce, ...)
-    - [ ] Test and ensure addon resilience and robustness (esp. WRT USB / remote devices disconnection)
-    - [ ] Complete support for remote NUT server discovery and configuration (autoconf_remote_nut_devices)
-    - [ ] Apparmor & security
-    - [ ] Add more translations if possible (make a doc section to ease contributions!)
-    - [ ] Dev & users feedback integration, issues fix and polishing
 
 ### Beta:
 
 - Aim:
-  - General improvements: stability, reactivity (no more dual loop), footprint (lower CPU) and clean code (no more shell hack)
+  - General improvements: stability, reactivity (no more dual loop), footprint (lower CPU), completion and clean code (no more shell hack)
 - Requirements/solutions:
+  - Finalize and stabilize the first prototype, while waiting for upstream NUT (2.8.2?)
   - Finalize upstream SmartNUT: https://github.com/networkupstools/nut/projects/3
   - Switch SmartNUT Add-on to upstream SmartNUT
 - Roadmap:
+  - [ ] 0.3
+    - [x] Complete CICD deployments
+    - [ ] Improve MQTT integration (better topic and payload, config announce, ...)
+    - [ ] Test and ensure addon resilience and robustness (esp. WRT USB / remote devices disconnection)
+    - [ ] Complete support for remote NUT server discovery and configuration (autoconf_remote_nut_devices). Move upsdrvctl & dstate-nut2mqtt as s6 services?
+    - [ ] Apparmor & security
+    - [ ] Add more translations if possible (make a doc section to ease contributions!)
+    - [ ] Dev & users feedback integration, issues fix and polishing
   - [ ] 0.4 - 0.5:
     - [ ] Work on MQTT full UPS integration in https://www.home-assistant.io/integrations/mqtt
     - [ ] Consider other publication methods, more direct with HA
@@ -207,7 +208,7 @@ our [GitHub Repository][repository].
 [nut-compatible]: https://networkupstools.org/stable-hcl.html
 [nut-features]: https://networkupstools.org/features.html
 [nut-ha-docs]: https://www.home-assistant.io/integrations/smartnut/
-[project-stage-shield]: https://img.shields.io/badge/project%20stage-alpha-yellow.svg
+[project-stage-shield]: https://img.shields.io/badge/project%20stage-beta-yellow.svg
 [reddit]: https://reddit.com/r/homeassistant
 [releases-shield]: https://img.shields.io/github/release/aquette/addon-smartnut.svg
 [releases]: https://github.com/aquette/addon-smartnut/releases
