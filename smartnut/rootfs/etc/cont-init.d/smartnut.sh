@@ -114,7 +114,7 @@ MQTT_HOST=""
 MQTT_USER=""
 MQTT_PASSWORD=""
 
-if [ bashio::services.available "mqtt" ]; then
+if bashio::services.available "mqtt"; then
     bashio::log.info "From Home Assistant service"
     MQTT_HOST=$(bashio::services mqtt "host")
     MQTT_USER=$(bashio::services mqtt "username")
