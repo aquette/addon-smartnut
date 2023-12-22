@@ -104,9 +104,7 @@ As a result, many NUT limitations can be removed, to focus on drivers and event 
   - [ ] 0.4 - 0.5:
     - [ ] Work on MQTT full UPS integration in https://www.home-assistant.io/integrations/mqtt
     - [ ] Consider other publication methods, more direct with HA
-    - [ ] Ease NetXML-UPS discovery and configuration (autoconf_netxml_devices).
-          - Really useful? MGE/Eaton XML/PDC NMC are long gone! But let's put under hidden options.
-          - [ ] Revise Eaton NM3 policy and disclose protocol / implementation! @arnaudquette-eaton
+    - [ ] Ease NetXML-UPS discovery and configuration (autoconf_netxml_devices). - Really useful? MGE/Eaton XML/PDC NMC are long gone! But let's put under hidden options. - [ ] Revise Eaton NM3 policy and disclose protocol / implementation! @arnaudquette-eaton
     - [ ] Ease SNMP UPS discovery and configuration (autoconf_snmp_devices)
           Note: Handle SNMP required settings, if not using the default (unsecured) SNMP v1 and 'public' community!
     - [ ] Dev & users feedback integration, issues fix and polishing
