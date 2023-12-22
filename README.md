@@ -92,26 +92,30 @@ As a result, many NUT limitations can be removed, to focus on drivers and event 
 - Roadmap:
   - [ ] 0.3
     - [x] Complete CICD deployments
-    - [ ] Start advertizing
-    - [ ] Improve MQTT integration (better topic and payload, config announce, ...)
+    - [ ] Advertize SmartNUT and call to test (on NUT mailing lists, Discord channels and with bloggers)
+    - [ ] Apply log_level (in smartnut.sh and possibly dstate_nut2mqtt, thru params handling)
     - [ ] Move upsdrvctl & dstate-nut2mqtt as s6 services (may solve USB issues)
+    - [ ] Improve MQTT integration (better topic and payload, config announce, ...)
     - [ ] Test and ensure addon resilience and robustness (esp. WRT USB / remote devices disconnection)
     - [x] Complete support for remote NUT server discovery and configuration (autoconf_remote_nut_devices), with system network autodetection.
-    - [ ] Apparmor & security
+    - [ ] Apparmor & security hardening (need map?)
     - [ ] Add more translations if possible (make a doc section to ease contributions!)
     - [ ] Dev & users feedback integration, issues fix and polishing
   - [ ] 0.4 - 0.5:
     - [ ] Work on MQTT full UPS integration in https://www.home-assistant.io/integrations/mqtt
     - [ ] Consider other publication methods, more direct with HA
-    - [ ] Ease SNMP and NetXML-UPS discovery and configuration (autoconf_snmp_devices & autoconf_netxml_devices)
-          Note: SNMP requires settings, if not using the default (unsecured) SNMP v1 and 'public' community!
+    - [ ] Ease NetXML-UPS discovery and configuration (autoconf_netxml_devices).
+          - Really useful? MGE/Eaton XML/PDC NMC are long gone! But let's put under hidden options.
+          - [ ] Revise Eaton NM3 policy and disclose protocol / implementation! @arnaudquette-eaton
+    - [ ] Ease SNMP UPS discovery and configuration (autoconf_snmp_devices)
+          Note: Handle SNMP required settings, if not using the default (unsecured) SNMP v1 and 'public' community!
     - [ ] Dev & users feedback integration, issues fix and polishing
   - [ ] 0.6: 1rst functional prototype, using upstream SmartNUT, with Debian packages
   - [ ] 0.7 - 0.9: users feedback integration, issues fix and polishing
 
 ### Stable
 
-- Aim: all Home Assistant SmartNUT Add-on Users happy :heart_eyes:
+- Aim: all Home Assistant SmartNUT Add-on Users happy with the Best NUT and UPS integration of the World :heart_eyes:
 - Roadmap:
   - [ ] 1.0 - ...: ?
 
