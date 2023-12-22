@@ -138,13 +138,13 @@ fi
 #  - cert: str?
 
 # MQTT sanity check
-if [ -z "$MQTT_HOST" -o -z "$MQTT_USER" -o -z "$MQTT_PASSWORD" -o ]; then
-bashio::log.info "=> OK"
-{
-    echo "MQTT_HOST=$MQTT_HOST"
-    echo "MQTT_USER=$MQTT_USER"
-    echo "MQTT_PASSWORD=$MQTT_PASSWORD"
-} > /etc/nut/libnutdrv_mqtt.conf
+if [ -n "$MQTT_HOST" -a -n "$MQTT_USER" -a -n "$MQTT_PASSWORD" ]; then
+    bashio::log.info "=> OK"
+    {
+        echo "MQTT_HOST=$MQTT_HOST"
+        echo "MQTT_USER=$MQTT_USER"
+        echo "MQTT_PASSWORD=$MQTT_PASSWORD"
+    } > /etc/nut/libnutdrv_mqtt.conf
 else
     bashio::log.info "=> ERROR: Missing / not autodetected MQTT configuration!"
     exit 1
