@@ -138,7 +138,7 @@ fi
 #  - cert: str?
 
 # MQTT sanity check
-if [ -n "$MQTT_HOST" -a -n "$MQTT_USER" -a -n "$MQTT_PASSWORD" ]; then
+if [ -n "$MQTT_HOST" ] && [ -n "$MQTT_USER" ] && [ -n "$MQTT_PASSWORD" ]; then
     bashio::log.info "=> OK"
     {
         echo "MQTT_HOST=$MQTT_HOST"
