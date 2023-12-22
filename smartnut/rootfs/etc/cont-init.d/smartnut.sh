@@ -4,10 +4,13 @@
 # Configures SmartNUT - Network UPS Tools
 # ==============================================================================
 
+# NOTES:
+# autoconf_* & device name hack: https://github.com/networkupstools/nut/issues/2243 (NUT 2.8.2?)
+
 readonly UPS_CONF=/etc/nut/ups.conf
 
 # FIXME: check if root is really needed? simple 'nut' should do
-# and is better for security
+# and is better for security, no?
 chown root:root /var/run/nut
 chmod 0770 /var/run/nut
 
@@ -58,6 +61,8 @@ fi
 if bashio::config.true 'enable_simulated_device' ;then
     # https://networkupstools.org/docs/developer-guide.chunked/dev-tools.html
 
+    # FIXME: https://github.com/networkupstools/nut/issues/2242
+
     bashio::log.info "Configuring Simulation Device 'smartnut-dummy'..."
     {
         echo "[smartnut-dummy]"
@@ -98,43 +103,48 @@ fi
 # nut-scanner -M -m 192.168.1.1/24
 # FIXME: device name hack! (nutdev1 => nutdev-xml1)
 
-# MQTT config
+# MQTT configuration
 bashio::log.info "Configuring MQTT..."
 
 MQTT_HOST=""
 MQTT_USER=""
 MQTT_PASSWORD=""
 
-if bashio::config.has_value "mqtt.server"; then
-    bashio::log.info "From user configuration"
-    MQTT_HOST=$(bashio::config "mqtt.server")
-fi
-if bashio::config.has_value "mqtt.user"; then
-    MQTT_USER=$(bashio::config "mqtt.user")
-fi
-if bashio::config.has_value "mqtt.password"; then
-    MQTT_PASSWORD=$(bashio::config "mqtt.password")
-fi
-if [ -z "$MQTT_HOST" ]; then
+if [ bashio::services.available "mqtt" ]; then
     bashio::log.info "From Home Assistant service"
     MQTT_HOST=$(bashio::services mqtt "host")
     MQTT_USER=$(bashio::services mqtt "username")
     MQTT_PASSWORD=$(bashio::services mqtt "password")
+else
+    bashio::log.info "From user configuration"
+
+    if bashio::config.has_value "mqtt.server"; then
+        MQTT_HOST=$(bashio::config "mqtt.server")
+    fi
+    if bashio::config.has_value "mqtt.user"; then
+        MQTT_USER=$(bashio::config "mqtt.user")
+    fi
+    if bashio::config.has_value "mqtt.password"; then
+        MQTT_PASSWORD=$(bashio::config "mqtt.password")
+    fi
 fi
 # FIXME: complete MQTT support
 #  - ca: str?
 #  - key: str?
 #  - cert: str?
 
-# FIXME: MQTT sanity check (-n MQTT_HOST MQTT_USER MQTT_PASSWORD) and error catching
+# MQTT sanity check
+if [ -z "$MQTT_HOST" -o -z "$MQTT_USER" -o -z "$MQTT_PASSWORD" -o ]; then
 bashio::log.info "=> OK"
-
-# FIXME: get config...
 {
     echo "MQTT_HOST=$MQTT_HOST"
     echo "MQTT_USER=$MQTT_USER"
     echo "MQTT_PASSWORD=$MQTT_PASSWORD"
 } > /etc/nut/libnutdrv_mqtt.conf
+else
+    bashio::log.info "=> ERROR: Missing / not autodetected MQTT configuration!"
+    exit 1
+fi
 
 bashio::log.info "---------------------"
 bashio::log.info "Checking configuration:"
@@ -145,6 +155,11 @@ cat /etc/nut/libnutdrv_mqtt.conf
 # FIXME: -s sanity check for status
 bashio::log.info "=> OK"
 
+# Notes:
+# * move under s6 services.d
+# * Use -F to keep foreground and 1 process tree
+#   (https://networkupstools.org/historic/v2.8.1/docs/man/upsdrvctl.html)
+# * -F requires NUT 2.8.1!
 bashio::log.info "---------------------"
 bashio::log.info "Starting the SmartNUT Driver(s)..."
 upsdrvctl -u root start
