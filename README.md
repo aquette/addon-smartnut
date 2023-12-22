@@ -96,15 +96,15 @@ As a result, many NUT limitations can be removed, to focus on drivers and event 
     - [ ] Improve MQTT integration (better topic and payload, config announce, ...)
     - [ ] Move upsdrvctl & dstate-nut2mqtt as s6 services (may solve USB issues)
     - [ ] Test and ensure addon resilience and robustness (esp. WRT USB / remote devices disconnection)
-    - [ ] Complete support for remote NUT server discovery and configuration (autoconf_remote_nut_devices).
+    - [x] Complete support for remote NUT server discovery and configuration (autoconf_remote_nut_devices), with system network autodetection.
     - [ ] Apparmor & security
     - [ ] Add more translations if possible (make a doc section to ease contributions!)
     - [ ] Dev & users feedback integration, issues fix and polishing
   - [ ] 0.4 - 0.5:
     - [ ] Work on MQTT full UPS integration in https://www.home-assistant.io/integrations/mqtt
     - [ ] Consider other publication methods, more direct with HA
-    - [ ] Ease SNMP and NetXML-UPS discovery and configuration.
-          Options for autoconf_snmp_devices & autoconf_netxml_devices (?)
+    - [ ] Ease SNMP and NetXML-UPS discovery and configuration (autoconf_snmp_devices & autoconf_netxml_devices)
+          Note: SNMP requires settings, if not using the default (unsecured) SNMP v1 and 'public' community!
     - [ ] Dev & users feedback integration, issues fix and polishing
   - [ ] 0.6: 1rst functional prototype, using upstream SmartNUT, with Debian packages
   - [ ] 0.7 - 0.9: users feedback integration, issues fix and polishing

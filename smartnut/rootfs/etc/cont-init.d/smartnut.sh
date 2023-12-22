@@ -58,10 +58,10 @@ if bashio::config.true 'manually_edit_devices' ;then
     bashio::log.info "=> OK"
 fi
 
+# Notes:
+# * Documentation: https://networkupstools.org/docs/developer-guide.chunked/dev-tools.html
+# * FIXME: https://github.com/networkupstools/nut/issues/2242
 if bashio::config.true 'enable_simulated_device' ;then
-    # https://networkupstools.org/docs/developer-guide.chunked/dev-tools.html
-
-    # FIXME: https://github.com/networkupstools/nut/issues/2242
 
     bashio::log.info "Configuring Simulation Device 'smartnut-dummy'..."
     {
@@ -73,6 +73,9 @@ if bashio::config.true 'enable_simulated_device' ;then
     bashio::log.info "=> OK"
 fi
 
+# Notes:
+# * https://github.com/networkupstools/nut/issues/2236
+#   & Dockerfile workaround (cd /lib/nut; ln -s dummy-ups nutclient)
 
 if bashio::config.true 'autoconf_remote_nut_devices' ;then
 
@@ -82,26 +85,27 @@ if bashio::config.true 'autoconf_remote_nut_devices' ;then
     #nut-scanner -A
 
     # Or using classic method...
-    # FIXME: get network params ; for now, try a sane default
-    nut-scanner -O -m 192.168.1.1/24 >>  "${UPS_CONF}"
-
-    # NUT remote support hack! need upstream fix
-    # FIXME: + >>  "${UPS_CONF}"
-    # + cd /lib/nut; ln -s dummy-ups nutclient
+    # Get network params from the system
+    scan_range=$(bashio::network.ipv4_address)
+    if [ -n "$scan_range" ]; then
+        nut-scanner -O -m "$scan_range" >> "${UPS_CONF}"
+        bashio::log.info "=> OK"
+    else
+        bashio::log.info "=> no system network information!"
+    fi
     # FIXME: device name hack! (nutdev1 => nutdev-nut1)
-    bashio::log.info "=> OK"
-    # FIXME: sanity check -s
-    # test_config_file_and_print()
+    # FIXME: sanity check -s && test_config_and_save()
 fi
 
 # FIXME:
 # autoconf_snmp_devices
-# nut-scanner -S -m 192.168.1.1/24
+# nut-scanner -S -m "$scan_range"
 # FIXME: device name hack! (nutdev1 => nutdev-snmp1)
 #
 # autoconf_netxml_devices
-# nut-scanner -M -m 192.168.1.1/24
+# nut-scanner -M -m "$scan_range"
 # FIXME: device name hack! (nutdev1 => nutdev-xml1)
+
 
 # MQTT configuration
 bashio::log.info "Configuring MQTT..."
