@@ -88,6 +88,7 @@ if bashio::config.true 'autoconf_remote_nut_devices' ;then
     # Get network params from the system
     scan_range=$(bashio::network.ipv4_address)
     if [ -n "$scan_range" ]; then
+        bashio::log.info "=> Scanning using $scan_range"
         nut-scanner -O -m "$scan_range" >> "${UPS_CONF}"
         bashio::log.info "=> OK"
     else
