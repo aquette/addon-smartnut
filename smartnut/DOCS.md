@@ -263,8 +263,8 @@ password: "my_password"
 This option enables the creation of a simulated device, for development and
 test purposes.
 
-The device is named `smartnut-dummy`, and includes automatic status changes
-(ups.status switches).
+The device is named `smartnut-dummy`, includes automatic status changes
+(ups.status switches) and uses the following [`simulation file`][smartnut-dummy.seq].
 
 For more information, refer to the following links:
 
@@ -393,6 +393,7 @@ limitations under the License.
 [reddit]: https://reddit.com/r/homeassistant
 [releases]: https://github.com/hassio-addons/addon-nut/releases
 [semver]: https://semver.org/spec/v2.0.0
+[smartnut-dummy.seq]: https://github.com/aquette/addon-smartnut/blob/main/smartnut/rootfs/etc/nut/smartnut-dummy.seq
 [sleep]: https://linux.die.net/man/1/sleep
 [snmp-ups]: https://networkupstools.org/docs/man/snmp-ups.html
 [ups-conf]: https://networkupstools.org/docs/man/ups.conf.html
