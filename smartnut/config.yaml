@@ -22,12 +22,14 @@ map:
   - addon_config:rw
 options:
   autoconf_usb_devices: true
+  autoconf_remote_nut_devices: false
   manually_edit_devices: false
   devices: []
   mqtt: {}
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   autoconf_usb_devices: bool?
+  autoconf_remote_nut_devices: bool?
   manually_edit_devices: bool?
   devices:
     - name: str?
@@ -45,4 +47,3 @@ schema:
     key: str?
     cert: str?
   enable_simulated_device: bool?
-  autoconf_remote_nut_devices: bool?
