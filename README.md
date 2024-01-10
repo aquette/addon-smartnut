@@ -31,7 +31,7 @@
 
 SmartNUT is a refreshed form-factor of NUT - Network UPS Tools - suited to modern integrations and smart systems, like Home Assistant.
 
-SmartNUT allows you to monitor and manage UPS (battery backup) using a NUT drivers.
+SmartNUT allows you to monitor and manage UPS (battery backup) using NUT drivers.
 It lets you view their status, receives notifications about important events, and execute commands as device actions.
 
 Conversely to previous NUT Add-on, SmartNUT:
