@@ -22,6 +22,17 @@ find /etc/nut -not -perm 0660 -type d -exec chmod 0660 {} \;
 rm -f "${UPS_CONF}"
 touch "${UPS_CONF}"
 
+# Adapt driver log level to the system one
+if bashio::debug; then
+    echo "debug_min 5" >>  "${UPS_CONF}"
+fi
+
+# USB Debugging
+if bashio::config.true 'list_usb_devices' ;then
+    bashio::log.info "Connected USB devices:"
+    lsusb
+fi
+
 # Check for USB devices first
 if bashio::config.true 'autoconf_usb_devices' ;then
 
