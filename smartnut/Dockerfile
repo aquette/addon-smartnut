@@ -6,11 +6,11 @@ FROM ${BUILD_FROM}
 # hadolint ignore=DL3003
 RUN \
     apt-get update \
-    && apt-get install -y --no-install-recommends\
+    && apt-get install -y --no-install-recommends \
         nut=2.8.0-7 \
         nut-snmp=2.8.0-7 \
         nut-xml=2.8.0-7 \
-        usbutils=1:014-1 \
+        usbutils=1:014-1+deb12u1 \
         mosquitto-clients=2.0.11-1.2+deb12u1 \
         netcat-openbsd=1.219-1 \
         libavahi-client3=0.8-10 \
