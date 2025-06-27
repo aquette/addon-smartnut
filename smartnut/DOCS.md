@@ -50,7 +50,6 @@ https://www.home-assistant.io/common-tasks/os#installing-third-party-add-ons
 -->
 
 1. If you don't have an MQTT broker yet, follow these steps to get the Mosquitto add-on installed on your system:
-
    1. Navigate in your Home Assistant frontend to **Settings** -> **Add-ons** -> **Add-on store**.
    2. Find the "Mosquitto broker" add-on and click it.
    3. Click on the "INSTALL" button, then start it.
