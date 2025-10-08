@@ -34,6 +34,8 @@ SmartNUT is a refreshed form-factor of NUT - Network UPS Tools - suited to moder
 SmartNUT allows you to monitor and manage UPS (battery backup) using NUT drivers.
 It lets you view their status, receives notifications about important events, and execute commands as device actions.
 
+> **WARNING**: SmartNUT is not yet ready for production use! Data are not yet published to the right MQTT channels!
+
 Conversely to previous NUT Add-on, SmartNUT:
 
 - just uses NUT drivers, and eliminates NUT upsd and client layers, and their configuration complexity
